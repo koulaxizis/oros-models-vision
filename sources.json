@@ -39,6 +39,15 @@
     "generation_config.json"
    ],
    "licence": "MIT (model, (c) OpenAI); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)"
+  },
+  {
+   "dir": "yunet",
+   "repo": "opencv/face_detection_yunet",
+   "revision": "main",
+   "files": [
+    "face_detection_yunet_2023mar.onnx"
+   ],
+   "licence": "MIT (yunet/LICENSE), (c) Shiqi Yu and OpenCV Zoo contributors"
   }
  ],
  "local": [

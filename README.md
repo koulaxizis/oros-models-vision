@@ -18,6 +18,7 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `whisper-base/` | The Assistant's voice input (better at Greek) | OpenAI Whisper base, int8 ONNX export by Xenova | MIT (model), Apache-2.0 (export) | ~77 MB |
 | `u2netp/` | Atelier, Photo Lab: background removal | U²-Net u2netp, ONNX from rembg | Apache-2.0 | 4.6 MB |
 | `migan/` | Atelier: Magic eraser and Magic grab | MI-GAN 512 Places2, ONNX export of the IOPaint copy | MIT | 27 MB |
+| `yunet/` | Blur faces before sharing (detection only, never recognition) | YuNet 2023mar, OpenCV Zoo | MIT | 0.2 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
 file, its size and SHA-256, and for the Hugging Face copies the upstream
