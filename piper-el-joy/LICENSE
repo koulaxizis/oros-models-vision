@@ -14,3 +14,9 @@ this voice may not be sold or used for commercial purposes.
 orOS downloads this folder on the person's device only when they ask for
 the natural Greek voice, and says the licence where they download it.
 Nothing in it was changed.
+
+Lineage, as far as the model cards say: el_GR-joy-medium was trained by the
+Piper voices project on 3,216 recordings by Chara Kaltsou (CC BY-NC 4.0),
+starting from the el_GR rapunzelina checkpoint, which started from the
+en_US ryan checkpoint (RyanSpeech, CC BY-NC-SA 4.0). Treat the voice as
+non-commercial, and share it only unchanged and under the same terms.
