@@ -72,6 +72,17 @@
    "sha": {
     "migan512.onnx": "8cf778c94b2b20d93ee7dca47d85468e71f2d6a07f0f91323d3b886d1ef69ab1"
    }
+  },
+  {
+   "dir": "realesrgan",
+   "files": [
+    "realesr-general-x4v3.onnx"
+   ],
+   "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth (sha256 8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292), written as ONNX by tools/convert_realesrgan.py (numpy 2.5.5, onnx 1.23.2; no PyTorch)",
+   "licence": "BSD-3-Clause (realesrgan/LICENSE), (c) 2021 Xintao Wang",
+   "sha": {
+    "realesr-general-x4v3.onnx": "10279d50668a171356ee5e4b4cef12d11037eb338c437d900664eb79a29159d5"
+   }
   }
  ]
 }

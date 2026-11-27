@@ -19,6 +19,7 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `u2netp/` | Atelier, Photo Lab: background removal | U²-Net u2netp, ONNX from rembg | Apache-2.0 | 4.6 MB |
 | `migan/` | Atelier: Magic eraser and Magic grab | MI-GAN 512 Places2, ONNX export of the IOPaint copy | MIT | 27 MB |
 | `yunet/` | Blur faces before sharing (detection only, never recognition) | YuNet 2023mar, OpenCV Zoo | MIT | 0.2 MB |
+| `realesrgan/` | Photo Lab: Enlarge with AI 2×/4× | Real-ESRGAN general x4v3 (SRVGGNetCompact), ONNX written from the official weights | BSD-3-Clause | 4.9 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
 file, its size and SHA-256, and for the Hugging Face copies the upstream
@@ -37,6 +38,21 @@ on pull requests it only checks the hashes (`python3 tools/mirror.py --check`).
 `u2netp/` and `migan/` are the same bytes orOS shipped in its own `vendor/`
 folder (u2netp is also byte for byte rembg's release file); the script only
 hashes them.
+
+`realesrgan/` is the one model whose upstream release is not ONNX (only a
+PyTorch `.pth`). `tools/convert_realesrgan.py` reads the official
+`realesr-general-x4v3.pth` (release v0.2.5.0, SHA-256 checked) with the
+standard library and numpy, without PyTorch, and writes the same network as
+an ONNX graph (opset 17, input RGB 0..1 `[1, 3, H, W]`, output `[1, 3, 4H,
+4W]`). The output is byte for byte reproducible:
+
+    pip install numpy==2.5.5 onnx==1.23.2
+    curl -LO https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth
+    python3 tools/convert_realesrgan.py realesr-general-x4v3.pth realesrgan/realesr-general-x4v3.onnx \
+      --sha 8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292
+
+It was checked against a plain numpy run of the PyTorch network (largest
+difference 1.6e-6) with ONNX Runtime.
 
 ### Adding a model
 
