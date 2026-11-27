@@ -72,6 +72,19 @@
    "sha": {
     "migan512.onnx": "8cf778c94b2b20d93ee7dca47d85468e71f2d6a07f0f91323d3b886d1ef69ab1"
    }
+  },
+  {
+   "dir": "demucs",
+   "files": [
+    "htdemucs.onnx",
+    "export.json"
+   ],
+   "source": "ONNX export of Meta's htdemucs checkpoint (hybrid_transformer/955717e8-8726e21a.th) by tools/export_demucs.py; demucs/export.json has the details and the check against demucs",
+   "licence": "MIT (demucs/LICENSE), (c) Meta Platforms, Inc. and affiliates",
+   "sha": {
+    "htdemucs.onnx": "621c14f9c9d3d275475955d0caf7f1e5c001dc30a3e40da79df7286a1b82ca13",
+    "export.json": "0adf09d82b5cdfcd852961b9f7dea457670a265ffb06e1c0a86b5291aa1d91c6"
+   }
   }
  ]
 }
