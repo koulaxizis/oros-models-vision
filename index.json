@@ -464,6 +464,20 @@
     }
    }
   },
+  "demucs": {
+   "source": "ONNX export of Meta's htdemucs checkpoint (hybrid_transformer/955717e8-8726e21a.th) by tools/export_demucs.py; demucs/export.json has the details and the check against demucs",
+   "licence": "MIT (demucs/LICENSE), (c) Meta Platforms, Inc. and affiliates",
+   "files": {
+    "htdemucs.onnx": {
+     "size": 90561712,
+     "sha": "621c14f9c9d3d275475955d0caf7f1e5c001dc30a3e40da79df7286a1b82ca13"
+    },
+    "export.json": {
+     "size": 2714,
+     "sha": "0adf09d82b5cdfcd852961b9f7dea457670a265ffb06e1c0a86b5291aa1d91c6"
+    }
+   }
+  },
   "realesrgan": {
    "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth (sha256 8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292), written as ONNX by tools/convert_realesrgan.py (numpy 2.5.5, onnx 1.23.2; no PyTorch)",
    "licence": "BSD-3-Clause (realesrgan/LICENSE), (c) 2021 Xintao Wang",

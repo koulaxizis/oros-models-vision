@@ -19,6 +19,7 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `u2netp/` | Atelier, Photo Lab: background removal | U²-Net u2netp, ONNX from rembg | Apache-2.0 | 4.6 MB |
 | `migan/` | Atelier: Magic eraser and Magic grab | MI-GAN 512 Places2, ONNX export of the IOPaint copy | MIT | 27 MB |
 | `yunet/` | Blur faces before sharing (detection only, never recognition) | YuNet 2023mar, OpenCV Zoo | MIT | 0.2 MB |
+| `demucs/` | Studio: separate vocals, drums, bass and the rest of a song | Meta Demucs v4 `htdemucs`, our own ONNX export (float16 weights) | MIT | 90 MB |
 | `realesrgan/` | Photo Lab: Enlarge with AI 2×/4× | Real-ESRGAN general x4v3 (SRVGGNetCompact), ONNX written from the official weights | BSD-3-Clause | 4.9 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
@@ -39,8 +40,18 @@ on pull requests it only checks the hashes (`python3 tools/mirror.py --check`).
 folder (u2netp is also byte for byte rembg's release file); the script only
 hashes them.
 
-`realesrgan/` is the one model whose upstream release is not ONNX (only a
-PyTorch `.pth`). `tools/convert_realesrgan.py` reads the official
+`demucs/` is not a copy: Meta publishes Demucs only
+as a PyTorch checkpoint. `tools/export_demucs.py` (workflow
+`.github/workflows/export-demucs.yml`) downloads that checkpoint, checks its
+hash, exports the model without its STFT (orOS does the STFT in JavaScript,
+exactly as `tools/demucs_spec.py`), stores the weights as float16, and
+refuses the file unless the whole separation as orOS does it
+(`tools/demucs_ref.py`) matches demucs' own `apply_model` on a test signal by
+at least 50 dB. `demucs/export.json` records the checkpoint's hash, the tool
+versions and the check's result.
+
+`realesrgan/` is not a copy either: its upstream release is only a PyTorch
+`.pth`. `tools/convert_realesrgan.py` reads the official
 `realesr-general-x4v3.pth` (release v0.2.5.0, SHA-256 checked) with the
 standard library and numpy, without PyTorch, and writes the same network as
 an ONNX graph (opset 17, input RGB 0..1 `[1, 3, H, W]`, output `[1, 3, 4H,
@@ -62,6 +73,6 @@ difference 1.6e-6) with ONNX Runtime.
    `index.json`. Never edit `index.json` or a model file by hand.
 3. Write the hashes from `index.json` into the orOS code that downloads it.
 
-The site is about 300 MB now; keep it under 1 GB.
+The site is about 390 MB now; keep it under 1 GB.
 
 Security: see [koulaxizis/oros-models SECURITY.md](https://github.com/koulaxizis/oros-models/blob/main/SECURITY.md).
