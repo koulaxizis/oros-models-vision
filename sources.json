@@ -1,0 +1,77 @@
+{
+ "note": "What tools/mirror.py copies from Hugging Face, unchanged. 'revision' pins the upstream commit; 'main' is resolved to a commit on the first run and written to index.json, which later runs keep.",
+ "hf": [
+  {
+   "dir": "clip-vit-base-patch32",
+   "repo": "Xenova/clip-vit-base-patch32",
+   "revision": "main",
+   "files": [
+    "onnx/vision_model_quantized.onnx",
+    "onnx/text_model_quantized.onnx",
+    "vocab.json",
+    "merges.txt",
+    "tokenizer_config.json",
+    "preprocessor_config.json",
+    "config.json"
+   ],
+   "licence": "MIT (model, (c) OpenAI); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)"
+  },
+  {
+   "dir": "whisper-tiny",
+   "repo": "Xenova/whisper-tiny",
+   "revision": "main",
+   "files": [
+    "onnx/encoder_model_quantized.onnx",
+    "onnx/decoder_model_merged_quantized.onnx",
+    "vocab.json",
+    "generation_config.json"
+   ],
+   "licence": "MIT (model, (c) OpenAI); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)"
+  },
+  {
+   "dir": "whisper-base",
+   "repo": "Xenova/whisper-base",
+   "revision": "main",
+   "files": [
+    "onnx/encoder_model_quantized.onnx",
+    "onnx/decoder_model_merged_quantized.onnx",
+    "vocab.json",
+    "generation_config.json"
+   ],
+   "licence": "MIT (model, (c) OpenAI); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)"
+  },
+  {
+   "dir": "yunet",
+   "repo": "opencv/face_detection_yunet",
+   "revision": "main",
+   "files": [
+    "face_detection_yunet_2023mar.onnx"
+   ],
+   "licence": "MIT (yunet/LICENSE), (c) Shiqi Yu and OpenCV Zoo contributors"
+  }
+ ],
+ "local": [
+  {
+   "dir": "u2netp",
+   "files": [
+    "u2netp.onnx"
+   ],
+   "source": "https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx",
+   "licence": "Apache-2.0 (u2netp/LICENSE), (c) 2020 Xuebin Qin and contributors",
+   "sha": {
+    "u2netp.onnx": "309c8469258dda742793dce0ebea8e6dd393174f89934733ecc8b14c76f4ddd8"
+   }
+  },
+  {
+   "dir": "migan",
+   "files": [
+    "migan512.onnx"
+   ],
+   "source": "koulaxizis/oros vendor/migan/migan512.onnx (ONNX export of the IOPaint TorchScript copy of MI-GAN 512 Places2)",
+   "licence": "MIT (migan/LICENSE), (c) 2024 Picsart AI Research (PAIR)",
+   "sha": {
+    "migan512.onnx": "8cf778c94b2b20d93ee7dca47d85468e71f2d6a07f0f91323d3b886d1ef69ab1"
+   }
+  }
+ ]
+}

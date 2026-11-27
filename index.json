@@ -1,0 +1,468 @@
+{
+ "note": "Unchanged copies. size = bytes, sha = SHA-256. Written by tools/mirror.py; never edit by hand.",
+ "models": {
+  "clip-vit-base-patch32": {
+   "repo": "Xenova/clip-vit-base-patch32",
+   "revision": "6b7c523703ae26e39be4b03774966f8571c7f523",
+   "source": "https://huggingface.co/Xenova/clip-vit-base-patch32/tree/6b7c523703ae26e39be4b03774966f8571c7f523",
+   "licence": "MIT (model, (c) OpenAI); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)",
+   "files": {
+    "onnx/vision_model_quantized.onnx": {
+     "size": 89117001,
+     "sha": "583fd1110a514667812fee7d684952aaf82a99b959760c8d7dca7e0ab9839299"
+    },
+    "onnx/text_model_quantized.onnx": {
+     "size": 64504507,
+     "sha": "73baab855d406190da9faa498cfedf65f15cf309f4cc7385b7b032e6d08e5c3a"
+    },
+    "vocab.json": {
+     "size": 862328,
+     "sha": "5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363"
+    },
+    "merges.txt": {
+     "size": 524619,
+     "sha": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a"
+    },
+    "tokenizer_config.json": {
+     "size": 775,
+     "sha": "60ba2912bc6344c94bc16bbdec27fa1209409167b6f2fdf3cfe9e65462ea3967"
+    },
+    "preprocessor_config.json": {
+     "size": 520,
+     "sha": "6f638fb9401a6d6296feff533ee7efe657b787c49f954f82f5906b36ef2a1b1f"
+    },
+    "config.json": {
+     "size": 4524,
+     "sha": "493ef57ff783e42d1530c91b53469b7fdf8db8a9c1408e86998fcb7899a4f495"
+    }
+   },
+   "upstreamOnnx": [
+    {
+     "path": "onnx/model.onnx",
+     "size": 605799029
+    },
+    {
+     "path": "onnx/model_bnb4.onnx",
+     "size": 181695925
+    },
+    {
+     "path": "onnx/model_fp16.onnx",
+     "size": 303515168
+    },
+    {
+     "path": "onnx/model_q4.onnx",
+     "size": 189403477
+    },
+    {
+     "path": "onnx/model_q4f16.onnx",
+     "size": 125818295
+    },
+    {
+     "path": "onnx/model_quantized.onnx",
+     "size": 153695702
+    },
+    {
+     "path": "onnx/model_uint8.onnx",
+     "size": 152738540
+    },
+    {
+     "path": "onnx/text_model.onnx",
+     "size": 254058553
+    },
+    {
+     "path": "onnx/text_model_bnb4.onnx",
+     "size": 123367012
+    },
+    {
+     "path": "onnx/text_model_fp16.onnx",
+     "size": 127339794
+    },
+    {
+     "path": "onnx/text_model_int8.onnx",
+     "size": 64070791
+    },
+    {
+     "path": "onnx/text_model_q4.onnx",
+     "size": 125742108
+    },
+    {
+     "path": "onnx/text_model_q4f16.onnx",
+     "size": 72531963
+    },
+    {
+     "path": "onnx/text_model_quantized.onnx",
+     "size": 64504507
+    },
+    {
+     "path": "onnx/text_model_uint8.onnx",
+     "size": 64070835
+    },
+    {
+     "path": "onnx/vision_model.onnx",
+     "size": 351685709
+    },
+    {
+     "path": "onnx/vision_model_bnb4.onnx",
+     "size": 58310402
+    },
+    {
+     "path": "onnx/vision_model_fp16.onnx",
+     "size": 176080659
+    },
+    {
+     "path": "onnx/vision_model_int8.onnx",
+     "size": 88648877
+    },
+    {
+     "path": "onnx/vision_model_q4.onnx",
+     "size": 63642858
+    },
+    {
+     "path": "onnx/vision_model_q4f16.onnx",
+     "size": 53267374
+    },
+    {
+     "path": "onnx/vision_model_quantized.onnx",
+     "size": 89117001
+    },
+    {
+     "path": "onnx/vision_model_uint8.onnx",
+     "size": 88648915
+    }
+   ]
+  },
+  "whisper-tiny": {
+   "repo": "Xenova/whisper-tiny",
+   "revision": "5332fcc35e32a33b86612b9a57a89be7906102b1",
+   "source": "https://huggingface.co/Xenova/whisper-tiny/tree/5332fcc35e32a33b86612b9a57a89be7906102b1",
+   "licence": "MIT (model, (c) OpenAI); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)",
+   "files": {
+    "onnx/encoder_model_quantized.onnx": {
+     "size": 10124910,
+     "sha": "fd9d995b9dcb0520f0dbf6cf68651af639fc385f594d9d876e69ca2802dc438e"
+    },
+    "onnx/decoder_model_merged_quantized.onnx": {
+     "size": 30727765,
+     "sha": "6c0c125986b007d2e3734bec84c18bda0152071b90b87fadac6d7764499927a0"
+    },
+    "vocab.json": {
+     "size": 1036584,
+     "sha": "50d6a919f0a0601d56a04eb583c780d18553aa388254ba3158eb6a00f13e2c1a"
+    },
+    "generation_config.json": {
+     "size": 3716,
+     "sha": "68ac791fcb4999461a313472125042934656240ba1cba7d1c2627fcbb19ac24c"
+    }
+   },
+   "upstreamOnnx": [
+    {
+     "path": "onnx/decoder_model.onnx",
+     "size": 118406656
+    },
+    {
+     "path": "onnx/decoder_model_bnb4.onnx",
+     "size": 85954063
+    },
+    {
+     "path": "onnx/decoder_model_fp16.onnx",
+     "size": 59284531
+    },
+    {
+     "path": "onnx/decoder_model_int8.onnx",
+     "size": 110041956
+    },
+    {
+     "path": "onnx/decoder_model_merged.onnx",
+     "size": 118579599
+    },
+    {
+     "path": "onnx/decoder_model_merged_bnb4.onnx",
+     "size": 86150186
+    },
+    {
+     "path": "onnx/decoder_model_merged_fp16.onnx",
+     "size": 59603028
+    },
+    {
+     "path": "onnx/decoder_model_merged_int8.onnx",
+     "size": 30727931
+    },
+    {
+     "path": "onnx/decoder_model_merged_q4.onnx",
+     "size": 86739474
+    },
+    {
+     "path": "onnx/decoder_model_merged_q4f16.onnx",
+     "size": 46041144
+    },
+    {
+     "path": "onnx/decoder_model_merged_quantized.onnx",
+     "size": 30727765
+    },
+    {
+     "path": "onnx/decoder_model_merged_uint8.onnx",
+     "size": 30727961
+    },
+    {
+     "path": "onnx/decoder_model_q4.onnx",
+     "size": 86543639
+    },
+    {
+     "path": "onnx/decoder_model_q4f16.onnx",
+     "size": 45724502
+    },
+    {
+     "path": "onnx/decoder_model_quantized.onnx",
+     "size": 30460101
+    },
+    {
+     "path": "onnx/decoder_model_uint8.onnx",
+     "size": 110041986
+    },
+    {
+     "path": "onnx/decoder_with_past_model.onnx",
+     "size": 113654551
+    },
+    {
+     "path": "onnx/decoder_with_past_model_bnb4.onnx",
+     "size": 85287005
+    },
+    {
+     "path": "onnx/decoder_with_past_model_fp16.onnx",
+     "size": 56928509
+    },
+    {
+     "path": "onnx/decoder_with_past_model_int8.onnx",
+     "size": 108852031
+    },
+    {
+     "path": "onnx/decoder_with_past_model_q4.onnx",
+     "size": 85802901
+    },
+    {
+     "path": "onnx/decoder_with_past_model_q4f16.onnx",
+     "size": 45063048
+    },
+    {
+     "path": "onnx/decoder_with_past_model_quantized.onnx",
+     "size": 29229119
+    },
+    {
+     "path": "onnx/decoder_with_past_model_uint8.onnx",
+     "size": 108852054
+    },
+    {
+     "path": "onnx/encoder_model.onnx",
+     "size": 32909539
+    },
+    {
+     "path": "onnx/encoder_model_bnb4.onnx",
+     "size": 8563828
+    },
+    {
+     "path": "onnx/encoder_model_fp16.onnx",
+     "size": 16519776
+    },
+    {
+     "path": "onnx/encoder_model_q4.onnx",
+     "size": 9006044
+    },
+    {
+     "path": "onnx/encoder_model_q4f16.onnx",
+     "size": 6303086
+    },
+    {
+     "path": "onnx/encoder_model_quantized.onnx",
+     "size": 10124910
+    },
+    {
+     "path": "onnx/encoder_model_uint8.onnx",
+     "size": 10079602
+    }
+   ]
+  },
+  "whisper-base": {
+   "repo": "Xenova/whisper-base",
+   "revision": "64da57285918e20ea79ea5c88eed7197933abaa8",
+   "source": "https://huggingface.co/Xenova/whisper-base/tree/64da57285918e20ea79ea5c88eed7197933abaa8",
+   "licence": "MIT (model, (c) OpenAI); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)",
+   "files": {
+    "onnx/encoder_model_quantized.onnx": {
+     "size": 23200850,
+     "sha": "3e345e977b55620a37c0c2b2af0644e019afdfad562dcf71eb929bb7274285f9"
+    },
+    "onnx/decoder_model_merged_quantized.onnx": {
+     "size": 53707539,
+     "sha": "a6beb6baabb66f00b6a686d828c95ffca6146d51900cbad0266cad38f64cf861"
+    },
+    "vocab.json": {
+     "size": 1036584,
+     "sha": "50d6a919f0a0601d56a04eb583c780d18553aa388254ba3158eb6a00f13e2c1a"
+    },
+    "generation_config.json": {
+     "size": 3776,
+     "sha": "3bba359e33fdd6dc1c10f71846a477d339b0242f462f70ea1dd73274caa38d05"
+    }
+   },
+   "upstreamOnnx": [
+    {
+     "path": "onnx/decoder_model.onnx",
+     "size": 208304195
+    },
+    {
+     "path": "onnx/decoder_model_bnb4.onnx",
+     "size": 121779106
+    },
+    {
+     "path": "onnx/decoder_model_fp16.onnx",
+     "size": 104271798
+    },
+    {
+     "path": "onnx/decoder_model_int8.onnx",
+     "size": 159408039
+    },
+    {
+     "path": "onnx/decoder_model_merged.onnx",
+     "size": 208560983
+    },
+    {
+     "path": "onnx/decoder_model_merged_bnb4.onnx",
+     "size": 122069922
+    },
+    {
+     "path": "onnx/decoder_model_merged_fp16.onnx",
+     "size": 104742968
+    },
+    {
+     "path": "onnx/decoder_model_merged_int8.onnx",
+     "size": 53707761
+    },
+    {
+     "path": "onnx/decoder_model_merged_q4.onnx",
+     "size": 123641874
+    },
+    {
+     "path": "onnx/decoder_model_merged_q4f16.onnx",
+     "size": 68573265
+    },
+    {
+     "path": "onnx/decoder_model_merged_quantized.onnx",
+     "size": 53707539
+    },
+    {
+     "path": "onnx/decoder_model_merged_uint8.onnx",
+     "size": 53707789
+    },
+    {
+     "path": "onnx/decoder_model_q4.onnx",
+     "size": 123351490
+    },
+    {
+     "path": "onnx/decoder_model_q4f16.onnx",
+     "size": 68104873
+    },
+    {
+     "path": "onnx/decoder_model_quantized.onnx",
+     "size": 53309877
+    },
+    {
+     "path": "onnx/decoder_model_uint8.onnx",
+     "size": 159408067
+    },
+    {
+     "path": "onnx/decoder_with_past_model.onnx",
+     "size": 195670910
+    },
+    {
+     "path": "onnx/decoder_with_past_model_bnb4.onnx",
+     "size": 120002734
+    },
+    {
+     "path": "onnx/decoder_with_past_model_fp16.onnx",
+     "size": 97985286
+    },
+    {
+     "path": "onnx/decoder_with_past_model_int8.onnx",
+     "size": 156245370
+    },
+    {
+     "path": "onnx/decoder_with_past_model_q4.onnx",
+     "size": 121378606
+    },
+    {
+     "path": "onnx/decoder_with_past_model_q4f16.onnx",
+     "size": 66338557
+    },
+    {
+     "path": "onnx/decoder_with_past_model_quantized.onnx",
+     "size": 50088237
+    },
+    {
+     "path": "onnx/decoder_with_past_model_uint8.onnx",
+     "size": 156245393
+    },
+    {
+     "path": "onnx/encoder_model.onnx",
+     "size": 82474863
+    },
+    {
+     "path": "onnx/encoder_model_bnb4.onnx",
+     "size": 17570314
+    },
+    {
+     "path": "onnx/encoder_model_fp16.onnx",
+     "size": 41333198
+    },
+    {
+     "path": "onnx/encoder_model_q4.onnx",
+     "size": 18749674
+    },
+    {
+     "path": "onnx/encoder_model_q4f16.onnx",
+     "size": 14138124
+    },
+    {
+     "path": "onnx/encoder_model_quantized.onnx",
+     "size": 23200850
+    },
+    {
+     "path": "onnx/encoder_model_uint8.onnx",
+     "size": 23132968
+    }
+   ]
+  },
+  "yunet": {
+   "repo": "opencv/face_detection_yunet",
+   "revision": "3cc26e7f1014a5ee5d74a42acee58bafc9d0a310",
+   "source": "https://huggingface.co/opencv/face_detection_yunet/tree/3cc26e7f1014a5ee5d74a42acee58bafc9d0a310",
+   "licence": "MIT (yunet/LICENSE), (c) Shiqi Yu and OpenCV Zoo contributors",
+   "files": {
+    "face_detection_yunet_2023mar.onnx": {
+     "size": 232589,
+     "sha": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+    }
+   },
+   "upstreamOnnx": []
+  },
+  "u2netp": {
+   "source": "https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx",
+   "licence": "Apache-2.0 (u2netp/LICENSE), (c) 2020 Xuebin Qin and contributors",
+   "files": {
+    "u2netp.onnx": {
+     "size": 4574861,
+     "sha": "309c8469258dda742793dce0ebea8e6dd393174f89934733ecc8b14c76f4ddd8"
+    }
+   }
+  },
+  "migan": {
+   "source": "koulaxizis/oros vendor/migan/migan512.onnx (ONNX export of the IOPaint TorchScript copy of MI-GAN 512 Places2)",
+   "licence": "MIT (migan/LICENSE), (c) 2024 Picsart AI Research (PAIR)",
+   "files": {
+    "migan512.onnx": {
+     "size": 26639447,
+     "sha": "8cf778c94b2b20d93ee7dca47d85468e71f2d6a07f0f91323d3b886d1ef69ab1"
+    }
+   }
+  }
+ }
+}

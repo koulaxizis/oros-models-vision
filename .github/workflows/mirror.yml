@@ -1,0 +1,39 @@
+name: Mirror models
+
+# Copies the files listed in sources.json from upstream, unchanged and
+# hash-checked (tools/mirror.py), and commits them with index.json to the
+# branch that was pushed. Pull requests only check the hashes.
+on:
+  push:
+    branches: ["claude/**"]
+    paths: ["sources.json", "tools/mirror.py", ".github/workflows/mirror.yml"]
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  mirror:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - run: python3 tools/mirror.py
+      - run: python3 tools/mirror.py --check
+      - name: Commit the copies
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+          git commit -m "Mirror models from sources.json (tools/mirror.py)"
+          git push
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - run: python3 tools/mirror.py --check
