@@ -48,6 +48,17 @@
     "face_detection_yunet_2023mar.onnx"
    ],
    "licence": "MIT (yunet/LICENSE), (c) Shiqi Yu and OpenCV Zoo contributors"
+  },
+  {
+   "dir": "piper-el-joy",
+   "repo": "rhasspy/piper-voices",
+   "revision": "main",
+   "files": [
+    "el/el_GR/joy/medium/el_GR-joy-medium.onnx",
+    "el/el_GR/joy/medium/el_GR-joy-medium.onnx.json",
+    "el/el_GR/joy/medium/MODEL_CARD"
+   ],
+   "licence": "CC BY-NC 4.0 (piper-el-joy/LICENSE): the voice el_GR-joy-medium of rhasspy/piper-voices; non-commercial use only, credit required"
   }
  ],
  "local": [

@@ -42,8 +42,20 @@
      "size": 605799029
     },
     {
+     "path": "onnx/model.onnx",
+     "size": 605799029
+    },
+    {
      "path": "onnx/model_bnb4.onnx",
      "size": 181695925
+    },
+    {
+     "path": "onnx/model_bnb4.onnx",
+     "size": 181695925
+    },
+    {
+     "path": "onnx/model_fp16.onnx",
+     "size": 303515168
     },
     {
      "path": "onnx/model_fp16.onnx",
@@ -54,8 +66,20 @@
      "size": 189403477
     },
     {
+     "path": "onnx/model_q4.onnx",
+     "size": 189403477
+    },
+    {
      "path": "onnx/model_q4f16.onnx",
      "size": 125818295
+    },
+    {
+     "path": "onnx/model_q4f16.onnx",
+     "size": 125818295
+    },
+    {
+     "path": "onnx/model_quantized.onnx",
+     "size": 153695702
     },
     {
      "path": "onnx/model_quantized.onnx",
@@ -66,8 +90,20 @@
      "size": 152738540
     },
     {
+     "path": "onnx/model_uint8.onnx",
+     "size": 152738540
+    },
+    {
      "path": "onnx/text_model.onnx",
      "size": 254058553
+    },
+    {
+     "path": "onnx/text_model.onnx",
+     "size": 254058553
+    },
+    {
+     "path": "onnx/text_model_bnb4.onnx",
+     "size": 123367012
     },
     {
      "path": "onnx/text_model_bnb4.onnx",
@@ -78,8 +114,20 @@
      "size": 127339794
     },
     {
+     "path": "onnx/text_model_fp16.onnx",
+     "size": 127339794
+    },
+    {
      "path": "onnx/text_model_int8.onnx",
      "size": 64070791
+    },
+    {
+     "path": "onnx/text_model_int8.onnx",
+     "size": 64070791
+    },
+    {
+     "path": "onnx/text_model_q4.onnx",
+     "size": 125742108
     },
     {
      "path": "onnx/text_model_q4.onnx",
@@ -90,8 +138,20 @@
      "size": 72531963
     },
     {
+     "path": "onnx/text_model_q4f16.onnx",
+     "size": 72531963
+    },
+    {
      "path": "onnx/text_model_quantized.onnx",
      "size": 64504507
+    },
+    {
+     "path": "onnx/text_model_quantized.onnx",
+     "size": 64504507
+    },
+    {
+     "path": "onnx/text_model_uint8.onnx",
+     "size": 64070835
     },
     {
      "path": "onnx/text_model_uint8.onnx",
@@ -102,8 +162,20 @@
      "size": 351685709
     },
     {
+     "path": "onnx/vision_model.onnx",
+     "size": 351685709
+    },
+    {
      "path": "onnx/vision_model_bnb4.onnx",
      "size": 58310402
+    },
+    {
+     "path": "onnx/vision_model_bnb4.onnx",
+     "size": 58310402
+    },
+    {
+     "path": "onnx/vision_model_fp16.onnx",
+     "size": 176080659
     },
     {
      "path": "onnx/vision_model_fp16.onnx",
@@ -114,6 +186,14 @@
      "size": 88648877
     },
     {
+     "path": "onnx/vision_model_int8.onnx",
+     "size": 88648877
+    },
+    {
+     "path": "onnx/vision_model_q4.onnx",
+     "size": 63642858
+    },
+    {
      "path": "onnx/vision_model_q4.onnx",
      "size": 63642858
     },
@@ -122,8 +202,20 @@
      "size": 53267374
     },
     {
+     "path": "onnx/vision_model_q4f16.onnx",
+     "size": 53267374
+    },
+    {
      "path": "onnx/vision_model_quantized.onnx",
      "size": 89117001
+    },
+    {
+     "path": "onnx/vision_model_quantized.onnx",
+     "size": 89117001
+    },
+    {
+     "path": "onnx/vision_model_uint8.onnx",
+     "size": 88648915
     },
     {
      "path": "onnx/vision_model_uint8.onnx",
@@ -160,8 +252,20 @@
      "size": 118406656
     },
     {
+     "path": "onnx/decoder_model.onnx",
+     "size": 118406656
+    },
+    {
      "path": "onnx/decoder_model_bnb4.onnx",
      "size": 85954063
+    },
+    {
+     "path": "onnx/decoder_model_bnb4.onnx",
+     "size": 85954063
+    },
+    {
+     "path": "onnx/decoder_model_fp16.onnx",
+     "size": 59284531
     },
     {
      "path": "onnx/decoder_model_fp16.onnx",
@@ -172,8 +276,20 @@
      "size": 110041956
     },
     {
+     "path": "onnx/decoder_model_int8.onnx",
+     "size": 110041956
+    },
+    {
      "path": "onnx/decoder_model_merged.onnx",
      "size": 118579599
+    },
+    {
+     "path": "onnx/decoder_model_merged.onnx",
+     "size": 118579599
+    },
+    {
+     "path": "onnx/decoder_model_merged_bnb4.onnx",
+     "size": 86150186
     },
     {
      "path": "onnx/decoder_model_merged_bnb4.onnx",
@@ -184,8 +300,20 @@
      "size": 59603028
     },
     {
+     "path": "onnx/decoder_model_merged_fp16.onnx",
+     "size": 59603028
+    },
+    {
      "path": "onnx/decoder_model_merged_int8.onnx",
      "size": 30727931
+    },
+    {
+     "path": "onnx/decoder_model_merged_int8.onnx",
+     "size": 30727931
+    },
+    {
+     "path": "onnx/decoder_model_merged_q4.onnx",
+     "size": 86739474
     },
     {
      "path": "onnx/decoder_model_merged_q4.onnx",
@@ -196,8 +324,20 @@
      "size": 46041144
     },
     {
+     "path": "onnx/decoder_model_merged_q4f16.onnx",
+     "size": 46041144
+    },
+    {
      "path": "onnx/decoder_model_merged_quantized.onnx",
      "size": 30727765
+    },
+    {
+     "path": "onnx/decoder_model_merged_quantized.onnx",
+     "size": 30727765
+    },
+    {
+     "path": "onnx/decoder_model_merged_uint8.onnx",
+     "size": 30727961
     },
     {
      "path": "onnx/decoder_model_merged_uint8.onnx",
@@ -208,8 +348,20 @@
      "size": 86543639
     },
     {
+     "path": "onnx/decoder_model_q4.onnx",
+     "size": 86543639
+    },
+    {
      "path": "onnx/decoder_model_q4f16.onnx",
      "size": 45724502
+    },
+    {
+     "path": "onnx/decoder_model_q4f16.onnx",
+     "size": 45724502
+    },
+    {
+     "path": "onnx/decoder_model_quantized.onnx",
+     "size": 30460101
     },
     {
      "path": "onnx/decoder_model_quantized.onnx",
@@ -220,8 +372,20 @@
      "size": 110041986
     },
     {
+     "path": "onnx/decoder_model_uint8.onnx",
+     "size": 110041986
+    },
+    {
      "path": "onnx/decoder_with_past_model.onnx",
      "size": 113654551
+    },
+    {
+     "path": "onnx/decoder_with_past_model.onnx",
+     "size": 113654551
+    },
+    {
+     "path": "onnx/decoder_with_past_model_bnb4.onnx",
+     "size": 85287005
     },
     {
      "path": "onnx/decoder_with_past_model_bnb4.onnx",
@@ -232,8 +396,20 @@
      "size": 56928509
     },
     {
+     "path": "onnx/decoder_with_past_model_fp16.onnx",
+     "size": 56928509
+    },
+    {
      "path": "onnx/decoder_with_past_model_int8.onnx",
      "size": 108852031
+    },
+    {
+     "path": "onnx/decoder_with_past_model_int8.onnx",
+     "size": 108852031
+    },
+    {
+     "path": "onnx/decoder_with_past_model_q4.onnx",
+     "size": 85802901
     },
     {
      "path": "onnx/decoder_with_past_model_q4.onnx",
@@ -244,8 +420,20 @@
      "size": 45063048
     },
     {
+     "path": "onnx/decoder_with_past_model_q4f16.onnx",
+     "size": 45063048
+    },
+    {
      "path": "onnx/decoder_with_past_model_quantized.onnx",
      "size": 29229119
+    },
+    {
+     "path": "onnx/decoder_with_past_model_quantized.onnx",
+     "size": 29229119
+    },
+    {
+     "path": "onnx/decoder_with_past_model_uint8.onnx",
+     "size": 108852054
     },
     {
      "path": "onnx/decoder_with_past_model_uint8.onnx",
@@ -256,8 +444,20 @@
      "size": 32909539
     },
     {
+     "path": "onnx/encoder_model.onnx",
+     "size": 32909539
+    },
+    {
      "path": "onnx/encoder_model_bnb4.onnx",
      "size": 8563828
+    },
+    {
+     "path": "onnx/encoder_model_bnb4.onnx",
+     "size": 8563828
+    },
+    {
+     "path": "onnx/encoder_model_fp16.onnx",
+     "size": 16519776
     },
     {
      "path": "onnx/encoder_model_fp16.onnx",
@@ -268,12 +468,28 @@
      "size": 9006044
     },
     {
+     "path": "onnx/encoder_model_q4.onnx",
+     "size": 9006044
+    },
+    {
+     "path": "onnx/encoder_model_q4f16.onnx",
+     "size": 6303086
+    },
+    {
      "path": "onnx/encoder_model_q4f16.onnx",
      "size": 6303086
     },
     {
      "path": "onnx/encoder_model_quantized.onnx",
      "size": 10124910
+    },
+    {
+     "path": "onnx/encoder_model_quantized.onnx",
+     "size": 10124910
+    },
+    {
+     "path": "onnx/encoder_model_uint8.onnx",
+     "size": 10079602
     },
     {
      "path": "onnx/encoder_model_uint8.onnx",
@@ -310,8 +526,20 @@
      "size": 208304195
     },
     {
+     "path": "onnx/decoder_model.onnx",
+     "size": 208304195
+    },
+    {
      "path": "onnx/decoder_model_bnb4.onnx",
      "size": 121779106
+    },
+    {
+     "path": "onnx/decoder_model_bnb4.onnx",
+     "size": 121779106
+    },
+    {
+     "path": "onnx/decoder_model_fp16.onnx",
+     "size": 104271798
     },
     {
      "path": "onnx/decoder_model_fp16.onnx",
@@ -322,8 +550,20 @@
      "size": 159408039
     },
     {
+     "path": "onnx/decoder_model_int8.onnx",
+     "size": 159408039
+    },
+    {
      "path": "onnx/decoder_model_merged.onnx",
      "size": 208560983
+    },
+    {
+     "path": "onnx/decoder_model_merged.onnx",
+     "size": 208560983
+    },
+    {
+     "path": "onnx/decoder_model_merged_bnb4.onnx",
+     "size": 122069922
     },
     {
      "path": "onnx/decoder_model_merged_bnb4.onnx",
@@ -334,8 +574,20 @@
      "size": 104742968
     },
     {
+     "path": "onnx/decoder_model_merged_fp16.onnx",
+     "size": 104742968
+    },
+    {
      "path": "onnx/decoder_model_merged_int8.onnx",
      "size": 53707761
+    },
+    {
+     "path": "onnx/decoder_model_merged_int8.onnx",
+     "size": 53707761
+    },
+    {
+     "path": "onnx/decoder_model_merged_q4.onnx",
+     "size": 123641874
     },
     {
      "path": "onnx/decoder_model_merged_q4.onnx",
@@ -346,8 +598,20 @@
      "size": 68573265
     },
     {
+     "path": "onnx/decoder_model_merged_q4f16.onnx",
+     "size": 68573265
+    },
+    {
      "path": "onnx/decoder_model_merged_quantized.onnx",
      "size": 53707539
+    },
+    {
+     "path": "onnx/decoder_model_merged_quantized.onnx",
+     "size": 53707539
+    },
+    {
+     "path": "onnx/decoder_model_merged_uint8.onnx",
+     "size": 53707789
     },
     {
      "path": "onnx/decoder_model_merged_uint8.onnx",
@@ -358,8 +622,20 @@
      "size": 123351490
     },
     {
+     "path": "onnx/decoder_model_q4.onnx",
+     "size": 123351490
+    },
+    {
      "path": "onnx/decoder_model_q4f16.onnx",
      "size": 68104873
+    },
+    {
+     "path": "onnx/decoder_model_q4f16.onnx",
+     "size": 68104873
+    },
+    {
+     "path": "onnx/decoder_model_quantized.onnx",
+     "size": 53309877
     },
     {
      "path": "onnx/decoder_model_quantized.onnx",
@@ -370,8 +646,20 @@
      "size": 159408067
     },
     {
+     "path": "onnx/decoder_model_uint8.onnx",
+     "size": 159408067
+    },
+    {
      "path": "onnx/decoder_with_past_model.onnx",
      "size": 195670910
+    },
+    {
+     "path": "onnx/decoder_with_past_model.onnx",
+     "size": 195670910
+    },
+    {
+     "path": "onnx/decoder_with_past_model_bnb4.onnx",
+     "size": 120002734
     },
     {
      "path": "onnx/decoder_with_past_model_bnb4.onnx",
@@ -382,8 +670,20 @@
      "size": 97985286
     },
     {
+     "path": "onnx/decoder_with_past_model_fp16.onnx",
+     "size": 97985286
+    },
+    {
      "path": "onnx/decoder_with_past_model_int8.onnx",
      "size": 156245370
+    },
+    {
+     "path": "onnx/decoder_with_past_model_int8.onnx",
+     "size": 156245370
+    },
+    {
+     "path": "onnx/decoder_with_past_model_q4.onnx",
+     "size": 121378606
     },
     {
      "path": "onnx/decoder_with_past_model_q4.onnx",
@@ -394,8 +694,20 @@
      "size": 66338557
     },
     {
+     "path": "onnx/decoder_with_past_model_q4f16.onnx",
+     "size": 66338557
+    },
+    {
      "path": "onnx/decoder_with_past_model_quantized.onnx",
      "size": 50088237
+    },
+    {
+     "path": "onnx/decoder_with_past_model_quantized.onnx",
+     "size": 50088237
+    },
+    {
+     "path": "onnx/decoder_with_past_model_uint8.onnx",
+     "size": 156245393
     },
     {
      "path": "onnx/decoder_with_past_model_uint8.onnx",
@@ -406,8 +718,20 @@
      "size": 82474863
     },
     {
+     "path": "onnx/encoder_model.onnx",
+     "size": 82474863
+    },
+    {
      "path": "onnx/encoder_model_bnb4.onnx",
      "size": 17570314
+    },
+    {
+     "path": "onnx/encoder_model_bnb4.onnx",
+     "size": 17570314
+    },
+    {
+     "path": "onnx/encoder_model_fp16.onnx",
+     "size": 41333198
     },
     {
      "path": "onnx/encoder_model_fp16.onnx",
@@ -418,12 +742,28 @@
      "size": 18749674
     },
     {
+     "path": "onnx/encoder_model_q4.onnx",
+     "size": 18749674
+    },
+    {
+     "path": "onnx/encoder_model_q4f16.onnx",
+     "size": 14138124
+    },
+    {
      "path": "onnx/encoder_model_q4f16.onnx",
      "size": 14138124
     },
     {
      "path": "onnx/encoder_model_quantized.onnx",
      "size": 23200850
+    },
+    {
+     "path": "onnx/encoder_model_quantized.onnx",
+     "size": 23200850
+    },
+    {
+     "path": "onnx/encoder_model_uint8.onnx",
+     "size": 23132968
     },
     {
      "path": "onnx/encoder_model_uint8.onnx",
@@ -440,6 +780,27 @@
     "face_detection_yunet_2023mar.onnx": {
      "size": 232589,
      "sha": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+    }
+   },
+   "upstreamOnnx": []
+  },
+  "piper-el-joy": {
+   "repo": "rhasspy/piper-voices",
+   "revision": "5ec43b186ef915a195d3ddbcfd9916e76c503c3f",
+   "source": "https://huggingface.co/rhasspy/piper-voices/tree/5ec43b186ef915a195d3ddbcfd9916e76c503c3f",
+   "licence": "CC BY-NC 4.0 (piper-el-joy/LICENSE): the voice el_GR-joy-medium of rhasspy/piper-voices; non-commercial use only, credit required",
+   "files": {
+    "el/el_GR/joy/medium/el_GR-joy-medium.onnx": {
+     "size": 63516050,
+     "sha": "31b1d51dc72dd43a5429b67798e27599f8cdcfce8a80265bc6f50d932bf144bc"
+    },
+    "el/el_GR/joy/medium/el_GR-joy-medium.onnx.json": {
+     "size": 7367,
+     "sha": "451a8885a0ea72e4432fffe22e65a75bbd2e65f6757273d1a5a9ed8a3419852e"
+    },
+    "el/el_GR/joy/medium/MODEL_CARD": {
+     "size": 349,
+     "sha": "a38d735f47d9c520ce067fa72645fae16caa8b60fcf20e7207ea2f6c289dc80e"
     }
    },
    "upstreamOnnx": []
