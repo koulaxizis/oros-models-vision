@@ -95,7 +95,12 @@ def main():
             continue
         if not rev or len(rev) != 40:
             rev = get_json("%s/api/models/%s/revision/%s" % (HF, repo, src["revision"]))["sha"]
+        # The listing of a big repository is cut into pages, so each folder
+        # that holds a wanted file is listed on its own (piper-voices has
+        # thousands of files), plus the whole tree for the onnx/ summary.
         tree = get_json("%s/api/models/%s/tree/%s?recursive=true" % (HF, repo, rev))
+        for folder in sorted({os.path.dirname(p) for p in src["files"] if os.path.dirname(p)}):
+            tree += get_json("%s/api/models/%s/tree/%s/%s" % (HF, repo, rev, folder))
         by_path = {t["path"]: t for t in tree if t.get("type") == "file"}
         for p in src["files"]:
             t = by_path.get(p)
