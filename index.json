@@ -431,6 +431,19 @@
     }
    ]
   },
+  "yunet": {
+   "repo": "opencv/face_detection_yunet",
+   "revision": "3cc26e7f1014a5ee5d74a42acee58bafc9d0a310",
+   "source": "https://huggingface.co/opencv/face_detection_yunet/tree/3cc26e7f1014a5ee5d74a42acee58bafc9d0a310",
+   "licence": "MIT (yunet/LICENSE), (c) Shiqi Yu and OpenCV Zoo contributors",
+   "files": {
+    "face_detection_yunet_2023mar.onnx": {
+     "size": 232589,
+     "sha": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+    }
+   },
+   "upstreamOnnx": []
+  },
   "u2netp": {
    "source": "https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx",
    "licence": "Apache-2.0 (u2netp/LICENSE), (c) 2020 Xuebin Qin and contributors",
@@ -448,6 +461,20 @@
     "migan512.onnx": {
      "size": 26639447,
      "sha": "8cf778c94b2b20d93ee7dca47d85468e71f2d6a07f0f91323d3b886d1ef69ab1"
+    }
+   }
+  },
+  "demucs": {
+   "source": "ONNX export of Meta's htdemucs checkpoint (hybrid_transformer/955717e8-8726e21a.th) by tools/export_demucs.py; demucs/export.json has the details and the check against demucs",
+   "licence": "MIT (demucs/LICENSE), (c) Meta Platforms, Inc. and affiliates",
+   "files": {
+    "htdemucs.onnx": {
+     "size": 90561712,
+     "sha": "621c14f9c9d3d275475955d0caf7f1e5c001dc30a3e40da79df7286a1b82ca13"
+    },
+    "export.json": {
+     "size": 2714,
+     "sha": "0adf09d82b5cdfcd852961b9f7dea457670a265ffb06e1c0a86b5291aa1d91c6"
     }
    }
   }
