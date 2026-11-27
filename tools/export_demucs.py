@@ -52,7 +52,7 @@ import demucs_ref as R  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CKPT_URL = "https://dl.fbaipublicfiles.com/demucs/hybrid_transformer/955717e8-8726e21a.th"
 CKPT_PREFIX = "8726e21a"
-CKPT_SHA = None        # pinned after the first export (full SHA-256 of the checkpoint)
+CKPT_SHA = "8726e21a993978c7ba086d3872e7608d7d5bfca646ca4aca459ffda844faa8b4"   # pinned after the first export
 MIN_SNR_DB = 50.0      # orOS's separation vs demucs' apply_model, float16 weights included
 OPSET = 17
 SOURCES = ["drums", "bass", "other", "vocals"]
