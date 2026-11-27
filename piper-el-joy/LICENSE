@@ -1,0 +1,16 @@
+el_GR-joy-medium: a Greek voice for the Piper text to speech system,
+copied unchanged from https://huggingface.co/rhasspy/piper-voices
+(el/el_GR/joy/medium/). Its model card (MODEL_CARD in this folder) names
+the dataset and the licence.
+
+Licence: Creative Commons Attribution-NonCommercial 4.0 International
+(CC BY-NC 4.0), https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+You may copy and share the voice and what it speaks for non-commercial
+purposes, with credit to its authors (the Piper voices project and the
+recordings named in MODEL_CARD) and a link to the licence. Speech made with
+this voice may not be sold or used for commercial purposes.
+
+orOS downloads this folder on the person's device only when they ask for
+the natural Greek voice, and says the licence where they download it.
+Nothing in it was changed.
