@@ -1,0 +1,17 @@
+{
+ "note": "Written by tools/deepfilter/build.py; never edit by hand.",
+ "upstream": "https://github.com/Rikorose/DeepFilterNet",
+ "upstreamCommit": "7b14b895fe7fc42cab72b4a4c1e49c982bd6404b",
+ "model": "models/DeepFilterNet3_onnx.tar.gz",
+ "modelSha256": "c94d91f70911001c946e0fabb4aa9adc37045f45a03b56008cb0c8244cb63616",
+ "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+ "wasmSize": 14104642,
+ "wasmSha256": "6bbf1c7a7bc45c8a1c774107042b6a47ca6a52c6c9506308082c9e96d0a4776f",
+ "check": {
+  "wasmVsNativeDb": 118.4,
+  "noiseCutDb": 24.0,
+  "realTimeFactor": 0.141,
+  "hop": 480,
+  "delay": 1440
+ }
+}
