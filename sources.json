@@ -126,7 +126,11 @@
     "export.json"
    ],
    "source": "ONNX conversion of Google's MoveNet SinglePose Lightning v4 (float16 TFLite) by tools/export_movenet.py; movenet/export.json has the details and the check against TFLite",
-   "licence": "Apache-2.0 (movenet/LICENSE), (c) Google LLC"
+   "licence": "Apache-2.0 (movenet/LICENSE), (c) Google LLC",
+   "sha": {
+    "movenet-lightning.onnx": "e74c62a3e9a8d7942355855ba3e9ca6eeb2e06fbcd8e4d8ceb5c291b2a03d663",
+    "export.json": "1630fdf420137230249ca33c80b0926608cf313fed9bf5e4e5b3468f8cb67fd3"
+   }
   }
  ]
 }

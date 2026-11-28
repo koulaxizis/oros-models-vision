@@ -23,7 +23,7 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `realesrgan/` | Photo Lab: Enlarge with AI 2×/4× | Real-ESRGAN general x4v3 (SRVGGNetCompact), ONNX written from the official weights | BSD-3-Clause | 4.9 MB |
 | `piper-el-joy/` | Read aloud: the natural Greek voice Joy | Piper voice el_GR-joy-medium (rhasspy/piper-voices), unchanged | CC BY-NC 4.0, non-commercial use only (`piper-el-joy/LICENSE`) | ~63 MB |
 | `depth-anything-v2-small/` | Photo Lab: Portrait blur (background blur by depth) | Depth Anything V2 Small, int8 ONNX export by onnx-community | Apache-2.0 (Small only) | ~25 MB |
-| `movenet/` | Workouts: count repetitions with the camera (body keypoints only) | Google MoveNet SinglePose Lightning v4, ONNX converted from the float16 TFLite release | Apache-2.0 | ~5 to 10 MB |
+| `movenet/` | Workouts: count repetitions with the camera (body keypoints only) | Google MoveNet SinglePose Lightning v4, ONNX converted from the float16 TFLite release | Apache-2.0 | 9.4 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
 file, its size and SHA-256, and for the Hugging Face copies the upstream
