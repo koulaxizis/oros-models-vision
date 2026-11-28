@@ -13,10 +13,6 @@ Standard library only. For every Hugging Face entry it:
 Files kept in "local" entries (copies of files orOS shipped itself) are
 only hashed. A file already here with the recorded hash is not fetched again.
 
-An entry with "listAll": true also records every upstream file of the
-commit (path and size) under upstreamFiles, to choose from (small
-repositories only).
-
 Usage: python3 tools/mirror.py [--check]   (--check: verify only, no network)
 """
 import hashlib
@@ -133,11 +129,6 @@ def main():
             "files": files,
             "upstreamOnnx": [{"path": p, "size": s} for p, s in others],
         }
-        if src.get("listAll"):
-            # small repositories only: every upstream file, to choose from
-            models[d]["upstreamFiles"] = sorted(
-                ({"path": t["path"], "size": t["size"]} for t in tree if t.get("type") == "file"),
-                key=lambda x: x["path"])
 
     for src in sources.get("local", []):
         d = src["dir"]

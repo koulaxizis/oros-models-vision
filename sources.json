@@ -76,21 +76,12 @@
    "repo": "rhasspy/piper-voices",
    "revision": "main",
    "files": [
+    "de/de_DE/thorsten/medium/de_DE-thorsten-medium.onnx",
+    "de/de_DE/thorsten/medium/de_DE-thorsten-medium.onnx.json",
     "de/de_DE/thorsten/medium/MODEL_CARD",
-    "de/de_DE/thorsten/high/MODEL_CARD",
-    "de/de_DE/thorsten/low/MODEL_CARD"
+    "nl/nl_BE/rdh/medium/MODEL_CARD"
    ],
-   "licence": "to be decided from the model cards (step 1: cards only)"
-  },
-  {
-   "dir": "thorsten-voice-piper",
-   "repo": "Thorsten-Voice/Piper",
-   "revision": "main",
-   "listAll": true,
-   "files": [
-    "README.md"
-   ],
-   "licence": "to be decided from the model card (step 1: card only)"
+   "licence": "CC0 dataset (Thorsten-Voice, Thorsten Müller); model card: fine-tuned from the rdh base model (nl_BE, CC0); voice de_DE-thorsten-medium of rhasspy/piper-voices (repository MIT) (piper-de-thorsten/LICENSE)"
   }
  ],
  "local": [
