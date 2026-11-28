@@ -59,6 +59,17 @@
     "el/el_GR/joy/medium/MODEL_CARD"
    ],
    "licence": "CC BY-NC 4.0 (piper-el-joy/LICENSE): the voice el_GR-joy-medium of rhasspy/piper-voices; non-commercial use only, credit required"
+  },
+  {
+   "dir": "depth-anything-v2-small",
+   "repo": "onnx-community/depth-anything-v2-small",
+   "revision": "main",
+   "files": [
+    "onnx/model_quantized.onnx",
+    "config.json",
+    "preprocessor_config.json"
+   ],
+   "licence": "Apache-2.0 (Depth Anything V2 Small only; (c) the Depth Anything V2 authors); ONNX export by onnx-community"
   }
  ],
  "local": [
