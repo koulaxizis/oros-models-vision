@@ -16,6 +16,10 @@ TensorFlow models. orOS runs ONNX with ONNX Runtime Web, so this script:
      eyes and shoulders found, nose above the shoulders);
   4. writes movenet/export.json (sources, hashes, tool versions, check).
 
+When movenet-lightning.onnx is already here with the hash sources.json
+pins, it is kept and only checked (steps 1 and 3): tf2onnx does not write
+byte-identical files from run to run.
+
 Usage: python3 tools/export_movenet.py   (needs network for step 1)
 """
 import hashlib
@@ -105,6 +109,19 @@ def convert(tfl_path):
     return model
 
 
+def pinned_ok():
+    """True when movenet/movenet-lightning.onnx is here with the hash that
+    sources.json pins for it."""
+    try:
+        with open(os.path.join(ROOT, "sources.json"), encoding="utf-8") as f:
+            src = json.load(f)
+        want = next(e for e in src.get("local", []) if e.get("dir") == "movenet")["sha"]["movenet-lightning.onnx"]
+        with open(OUT, "rb") as f:
+            return sha256(f.read()) == want
+    except (OSError, StopIteration, KeyError, ValueError):
+        return False
+
+
 def test_images():
     import numpy as np
     from skimage import data
@@ -132,7 +149,17 @@ def main():
         p = os.path.join(tmp, "movenet.tflite")
         with open(p, "wb") as f:
             f.write(tfl)
-        model = convert(p)
+        # The file already here with the hash pinned in sources.json is
+        # kept and checked again: tf2onnx does not write byte-identical
+        # graphs from run to run, so a fresh conversion is made only when
+        # nothing is pinned yet.
+        keep = pinned_ok()
+        if keep:
+            print("movenet-lightning.onnx is here with the pinned hash: checking it, not converting again", flush=True)
+            with open(OUT, "rb") as f:
+                data = f.read()
+        else:
+            data = convert(p).SerializeToString()
         interp = tf.lite.Interpreter(model_path=p)
         interp.allocate_tensors()
         tin, tout = interp.get_input_details()[0], interp.get_output_details()[0]
@@ -140,7 +167,6 @@ def main():
         if list(tin["shape"]) != [1, 192, 192, 3] or list(tout["shape"]) != [1, 1, 17, 3]:
             raise SystemExit("unexpected TFLite shapes %s %s" % (tin["shape"], tout["shape"]))
 
-        data = model.SerializeToString()
         sess = ort.InferenceSession(data, providers=["CPUExecutionProvider"])
         diffs, astro = {}, None
         for name, img in test_images().items():
@@ -162,6 +188,9 @@ def main():
         if low or not k["nose"][0] < min(k["left_shoulder"][0], k["right_shoulder"][0]):
             raise SystemExit("astronaut check failed: %s" % {n: k[n].tolist() for n in need})
 
+    if keep:
+        print("ok: the pinned file still matches TFLite (largest difference %g)" % worst)
+        return
     with open(OUT, "wb") as f:
         f.write(data)
     info = {

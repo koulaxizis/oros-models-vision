@@ -129,7 +129,10 @@ converts it with tf2onnx (opset 17), renames the input to `input` (uint8
 `[1, 1, 17, 3]`: y, x, score), and refuses the file unless ONNX Runtime gives
 the same keypoints as the TFLite interpreter (largest difference under 1e-4)
 and finds the person in a test photo. `movenet/export.json` records the
-source, both hashes, the tool versions and the check.
+source, both hashes, the tool versions and the check. tf2onnx does not write
+byte-identical files from run to run, so once the hash is pinned in
+`sources.json` a run keeps the file here and only checks it against TFLite
+again.
 
 ### Adding a model
 
