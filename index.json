@@ -891,6 +891,25 @@
     }
    ]
   },
+  "basic-pitch": {
+   "host": "github",
+   "repo": "spotify/basic-pitch",
+   "revision": "fa5997af0a8210982619003269994a1be25eddf3",
+   "source": "https://github.com/spotify/basic-pitch/tree/fa5997af0a8210982619003269994a1be25eddf3",
+   "licence": "Apache-2.0 (basic-pitch/LICENSE), (c) 2022 Spotify AB",
+   "files": {
+    "basic_pitch/saved_models/icassp_2022/nmp.onnx": {
+     "size": 230444,
+     "sha": "2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec",
+     "file": "nmp.onnx"
+    },
+    "LICENSE": {
+     "size": 11384,
+     "sha": "929c910bae2152fa87199a5d0660e09263419b7eee6d4b301d05ee2aaf211c37",
+     "file": "LICENSE"
+    }
+   }
+  },
   "u2netp": {
    "source": "https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx",
    "licence": "Apache-2.0 (u2netp/LICENSE), (c) 2020 Xuebin Qin and contributors",
