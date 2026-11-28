@@ -14,6 +14,9 @@ Standard library only. For every Hugging Face entry it:
   5. records size and SHA-256 in index.json, for a split file also each
      part's ("parts": [{size, sha}, ...]); orOS writes these hashes into its
      own code and checks every download against them.
+GitHub entries ("github": repo, revision, files) work the same way with
+the GitHub API: the revision is pinned to a commit and every file must
+match its git blob id in that commit's tree.
 Files kept in "local" entries (copies of files orOS shipped itself) are
 only hashed. A file already here with the recorded hash is not fetched again.
 
@@ -28,13 +31,20 @@ import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HF = "https://huggingface.co"
+GH_API = "https://api.github.com"
+GH_RAW = "https://raw.githubusercontent.com"
 PART_BYTES = 95 * 1000 * 1000      # largest file kept in the repository
 MAX_BYTES = 1000 * 1000 * 1000     # largest upstream file accepted at all
 UA = {"User-Agent": "oros-models-vision-mirror"}
 
 
 def get_json(url):
-    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as r:
+    headers = dict(UA)
+    # GitHub's API allows few calls without a token from a shared runner
+    # address; in Actions the workflow passes its own read token.
+    if url.startswith(GH_API + "/") and os.environ.get("GITHUB_TOKEN"):
+        headers["Authorization"] = "Bearer " + os.environ["GITHUB_TOKEN"]
+    with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=60) as r:
         return json.load(r)
 
 
@@ -189,6 +199,49 @@ def main():
             "licence": src.get("licence", ""),
             "files": files,
             "upstreamOnnx": [{"path": p, "size": s} for p, s in others],
+        }
+
+    for src in sources.get("github", []):
+        d, repo = src["dir"], src["repo"]
+        prev = old.get(d, {})
+        rev = prev.get("revision") if prev.get("repo") == repo else None
+        files = {}
+        if check_only:
+            for p in src["files"]:
+                dest = os.path.join(ROOT, d, os.path.basename(p))
+                want = prev.get("files", {}).get(p, {}).get("sha")
+                if not os.path.exists(dest) or sha256_of(dest) != want:
+                    bad.append(d + "/" + p)
+            models[d] = prev
+            continue
+        if not rev or len(rev) != 40:
+            rev = get_json("%s/repos/%s/commits/%s" % (GH_API, repo, src["revision"]))["sha"]
+        tree = get_json("%s/repos/%s/git/trees/%s?recursive=1" % (GH_API, repo, rev))
+        if tree.get("truncated"):
+            raise SystemExit("tree listing cut short: " + repo)
+        by_path = {t["path"]: t for t in tree["tree"] if t.get("type") == "blob"}
+        for p in src["files"]:
+            t = by_path.get(p)
+            if not t:
+                raise SystemExit("not upstream: %s %s" % (repo, p))
+            # kept flat: the folder holds the file under its own name
+            dest = os.path.join(ROOT, d, os.path.basename(p))
+            known = prev.get("files", {}).get(p, {}).get("sha")
+            if not (known and os.path.exists(dest) and sha256_of(dest) == known):
+                print("download", repo, p, flush=True)
+                download("%s/%s/%s/%s" % (GH_RAW, repo, rev, p), dest)
+            if git_blob_id(dest) != t.get("sha"):
+                raise SystemExit("git blob id differs from upstream: %s %s" % (repo, p))
+            if os.path.getsize(dest) > PART_BYTES:
+                raise SystemExit("too big for a github entry: %s %s" % (repo, p))
+            files[p] = {"size": os.path.getsize(dest), "sha": sha256_of(dest), "file": os.path.basename(p)}
+        models[d] = {
+            "host": "github",
+            "repo": repo,
+            "revision": rev,
+            "source": "https://github.com/%s/tree/%s" % (repo, rev),
+            "licence": src.get("licence", ""),
+            "files": files,
         }
 
     for src in sources.get("local", []):

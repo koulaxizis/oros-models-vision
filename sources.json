@@ -207,6 +207,29 @@
     "movenet-lightning.onnx": "e74c62a3e9a8d7942355855ba3e9ca6eeb2e06fbcd8e4d8ceb5c291b2a03d663",
     "export.json": "1630fdf420137230249ca33c80b0926608cf313fed9bf5e4e5b3468f8cb67fd3"
    }
+  },
+  {
+   "dir": "deepfilter",
+   "files": [
+    "deepfilter.wasm",
+    "build.json",
+    "LICENSE-MIT",
+    "LICENSE-APACHE"
+   ],
+   "source": "WebAssembly build of the official DeepFilterNet libDF runtime with the official DeepFilterNet3 model built in, by tools/deepfilter/build.py; deepfilter/build.json has the upstream commit, hashes and the check against the native build",
+   "licence": "MIT or Apache-2.0 (deepfilter/LICENSE-MIT, deepfilter/LICENSE-APACHE), (c) Hendrik Schroeter"
+  }
+ ],
+ "github": [
+  {
+   "dir": "basic-pitch",
+   "repo": "spotify/basic-pitch",
+   "revision": "main",
+   "files": [
+    "basic_pitch/saved_models/icassp_2022/nmp.onnx",
+    "LICENSE"
+   ],
+   "licence": "Apache-2.0 (basic-pitch/LICENSE), (c) 2022 Spotify AB"
   }
  ]
 }

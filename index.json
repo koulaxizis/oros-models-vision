@@ -1139,6 +1139,25 @@
     }
    ]
   },
+  "basic-pitch": {
+   "host": "github",
+   "repo": "spotify/basic-pitch",
+   "revision": "fa5997af0a8210982619003269994a1be25eddf3",
+   "source": "https://github.com/spotify/basic-pitch/tree/fa5997af0a8210982619003269994a1be25eddf3",
+   "licence": "Apache-2.0 (basic-pitch/LICENSE), (c) 2022 Spotify AB",
+   "files": {
+    "basic_pitch/saved_models/icassp_2022/nmp.onnx": {
+     "size": 230444,
+     "sha": "2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec",
+     "file": "nmp.onnx"
+    },
+    "LICENSE": {
+     "size": 11384,
+     "sha": "929c910bae2152fa87199a5d0660e09263419b7eee6d4b301d05ee2aaf211c37",
+     "file": "LICENSE"
+    }
+   }
+  },
   "u2netp": {
    "source": "https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx",
    "licence": "Apache-2.0 (u2netp/LICENSE), (c) 2020 Xuebin Qin and contributors",
@@ -1222,6 +1241,28 @@
     "export.json": {
      "size": 1727,
      "sha": "1630fdf420137230249ca33c80b0926608cf313fed9bf5e4e5b3468f8cb67fd3"
+    }
+   }
+  },
+  "deepfilter": {
+   "source": "WebAssembly build of the official DeepFilterNet libDF runtime with the official DeepFilterNet3 model built in, by tools/deepfilter/build.py; deepfilter/build.json has the upstream commit, hashes and the check against the native build",
+   "licence": "MIT or Apache-2.0 (deepfilter/LICENSE-MIT, deepfilter/LICENSE-APACHE), (c) Hendrik Schroeter",
+   "files": {
+    "deepfilter.wasm": {
+     "size": 14104642,
+     "sha": "6bbf1c7a7bc45c8a1c774107042b6a47ca6a52c6c9506308082c9e96d0a4776f"
+    },
+    "build.json": {
+     "size": 602,
+     "sha": "0a52838209ef6f3b3fae977e17930f90c8f9b11523ebfedadb0b9ce17a140d6a"
+    },
+    "LICENSE-MIT": {
+     "size": 1083,
+     "sha": "24e6bb09c928af8d8e56268082f87413247ce36b39dd5d33add2f9893968065e"
+    },
+    "LICENSE-APACHE": {
+     "size": 10837,
+     "sha": "1eaee808c5fb6b4e895ba30425285a5cdc5dd25bba2cd230f264c2200c331aec"
     }
    }
   }
