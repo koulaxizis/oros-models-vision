@@ -895,77 +895,26 @@
    "repo": "rhasspy/piper-voices",
    "revision": "613b6e5ad36ddca4e70e171957291483dc244d9f",
    "source": "https://huggingface.co/rhasspy/piper-voices/tree/613b6e5ad36ddca4e70e171957291483dc244d9f",
-   "licence": "to be decided from the model cards (step 1: cards only)",
+   "licence": "CC0 dataset (Thorsten-Voice, Thorsten Müller); model card: fine-tuned from the rdh base model (nl_BE, CC0); voice de_DE-thorsten-medium of rhasspy/piper-voices (repository MIT) (piper-de-thorsten/LICENSE)",
    "files": {
+    "de/de_DE/thorsten/medium/de_DE-thorsten-medium.onnx": {
+     "size": 63221984,
+     "sha": "fd270eb3d1ebf91d763f8a0f949b1b1bebdfefaea18c3aaf8577dd34536e064f"
+    },
+    "de/de_DE/thorsten/medium/de_DE-thorsten-medium.onnx.json": {
+     "size": 6455,
+     "sha": "e5bb7410dcbbcc0be6f4544f6bc66612b315ab5cb3099ec44bb46d860bc7cca9"
+    },
     "de/de_DE/thorsten/medium/MODEL_CARD": {
      "size": 427,
      "sha": "c638118fb06eb07d59e60270097c250cf2de81a037320a8a6306fec652ad13b0"
     },
-    "de/de_DE/thorsten/high/MODEL_CARD": {
-     "size": 279,
-     "sha": "a49334fc36286c9d67f007605969a33f416cc4e35eb770c9c7f716d44711fc3a"
-    },
-    "de/de_DE/thorsten/low/MODEL_CARD": {
-     "size": 274,
-     "sha": "f09e67d4e0dfcf53df996349fc0219d0dddeab502dc2bd0cf0512c6170bc944d"
+    "nl/nl_BE/rdh/medium/MODEL_CARD": {
+     "size": 462,
+     "sha": "f1d4eccf1292d42057550d5261e4d39959c02a7c509d8516da9f2ffd661ab8d6"
     }
    },
    "upstreamOnnx": []
-  },
-  "thorsten-voice-piper": {
-   "repo": "Thorsten-Voice/Piper",
-   "revision": "2c11851a427461f4e6a14b5c389386ffb0b01bc7",
-   "source": "https://huggingface.co/Thorsten-Voice/Piper/tree/2c11851a427461f4e6a14b5c389386ffb0b01bc7",
-   "licence": "to be decided from the model card (step 1: card only)",
-   "files": {
-    "README.md": {
-     "size": 660,
-     "sha": "0d4a0f4b07421f4696b311a60bd60ae69d560d2f434717740403fd4b61d21276"
-    }
-   },
-   "upstreamOnnx": [],
-   "upstreamFiles": [
-    {
-     "path": ".gitattributes",
-     "size": 1519
-    },
-    {
-     "path": "README.md",
-     "size": 660
-    },
-    {
-     "path": "de_DE-thorsten-high.onnx",
-     "size": 113895201
-    },
-    {
-     "path": "de_DE-thorsten-high.onnx.json",
-     "size": 4875
-    },
-    {
-     "path": "de_DE-thorsten-low.onnx",
-     "size": 63104526
-    },
-    {
-     "path": "de_DE-thorsten-low.onnx.json",
-     "size": 4159
-    },
-    {
-     "path": "de_DE-thorsten-medium.onnx",
-     "size": 63201294
-    },
-    {
-     "path": "de_DE-thorsten-medium.onnx.json",
-     "size": 4819
-    },
-    {
-     "path": "de_DE-thorsten_emotional-medium.onnx",
-     "size": 76745905
-    },
-    {
-     "path": "de_DE-thorsten_emotional-medium.onnx.json",
-     "size": 5031
-    }
-   ]
   },
   "u2netp": {
    "source": "https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx",
