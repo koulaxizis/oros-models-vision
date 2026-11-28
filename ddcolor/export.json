@@ -1,0 +1,141 @@
+{
+ "note": "Written by tools/export_ddcolor.py; never edit by hand.",
+ "model": "DDColor tiny (ddcolor_paper_tiny), Kang et al., ICCV 2023, Apache-2.0",
+ "code": "https://github.com/piddnad/DDColor/tree/2adb63f2656ac41cbdf7b894cddd94121a3faf13",
+ "weights": "https://huggingface.co/piddnad/ddcolor_paper_tiny/blob/cf9fd99c1d7472689ec7413441c1b799a51866a3/pytorch_model.bin",
+ "weightsSha256": "8a1277bc90a1bfbb6d2d83933a9a6bc821931879ca93e26e4fcec12165d41fce",
+ "huggingFaceRevision": "cf9fd99c1d7472689ec7413441c1b799a51866a3",
+ "kwargs": {
+  "encoder_name": "convnext-t",
+  "decoder_name": "MultiScaleColorDecoder",
+  "input_size": [
+   512,
+   512
+  ],
+  "num_output_channels": 2,
+  "last_norm": "Spectral",
+  "do_normalize": false,
+  "num_queries": 100,
+  "num_scales": 3,
+  "dec_layers": 9
+ },
+ "unusedKeys": 0,
+ "whole": {
+  "name": "ddcolor_tiny.onnx",
+  "size": 135696757,
+  "sha": "422bfa6f6d27d57106412d70874b4b8468bb29b777f16e3e15dfc9958f5b72cf"
+ },
+ "files": [
+  {
+   "name": "ddcolor_tiny.onnx.001",
+   "size": 95000000,
+   "sha": "f5d5a5408245c2a71250ad4f13305d1ebb5f2e412b882c513fd3440af4657307"
+  },
+  {
+   "name": "ddcolor_tiny.onnx.002",
+   "size": 40696757,
+   "sha": "0f45c428f8bce5afe4fa4a4fce3952e487b52fb8f000818296152eebb0e91e89"
+  }
+ ],
+ "tools": {
+  "torch": "2.15.0+cpu",
+  "onnx": "1.23.2",
+  "onnxruntime": "1.32.0",
+  "opset": 17
+ },
+ "graph": {
+  "input": {
+   "input": [
+    1,
+    3,
+    "H",
+    "W"
+   ]
+  },
+  "output": {
+   "output": [
+    1,
+    2,
+    "H",
+    "W"
+   ]
+  },
+  "sizeMultipleOf": 32,
+  "sizes": [
+   256,
+   512
+  ],
+  "weightsFloat16": true,
+  "input_is": "grey RGB 0..1 from the picture's L* (sRGB, D65), the model normalises itself",
+  "output_is": "a*, b* in CIE L*a*b* units"
+ },
+ "check": {
+  "pictures": [
+   {
+    "picture": "Abandoned Boy Holding a Stuffed Toy Animal. London 1945.jpg",
+    "size": 256,
+    "psnrDb": 84.2,
+    "maxAbsErrAb": 0.1604
+   },
+   {
+    "picture": "Acrobats Balance On Top Of The Empire State Building, 1934.jpg",
+    "size": 256,
+    "psnrDb": 83.2,
+    "maxAbsErrAb": 0.075
+   },
+   {
+    "picture": "Ansel Adams _ Moore Photography.jpeg",
+    "size": 256,
+    "psnrDb": 82.5,
+    "maxAbsErrAb": 0.1442
+   },
+   {
+    "picture": "Audrey Hepburn.jpg",
+    "size": 256,
+    "psnrDb": 83.6,
+    "maxAbsErrAb": 0.4112
+   },
+   {
+    "picture": "synthetic",
+    "size": 256,
+    "psnrDb": 89.1,
+    "maxAbsErrAb": 0.0356
+   },
+   {
+    "picture": "Abandoned Boy Holding a Stuffed Toy Animal. London 1945.jpg",
+    "size": 512,
+    "psnrDb": 84.3,
+    "maxAbsErrAb": 0.1431
+   },
+   {
+    "picture": "Acrobats Balance On Top Of The Empire State Building, 1934.jpg",
+    "size": 512,
+    "psnrDb": 84.5,
+    "maxAbsErrAb": 0.1528
+   },
+   {
+    "picture": "Ansel Adams _ Moore Photography.jpeg",
+    "size": 512,
+    "psnrDb": 84.9,
+    "maxAbsErrAb": 0.2088
+   },
+   {
+    "picture": "Audrey Hepburn.jpg",
+    "size": 512,
+    "psnrDb": 78.8,
+    "maxAbsErrAb": 0.526
+   },
+   {
+    "picture": "synthetic",
+    "size": 512,
+    "psnrDb": 79.0,
+    "maxAbsErrAb": 0.1
+   }
+  ],
+  "minPsnrDb": 78.8,
+  "nativeOneThreadSeconds": {
+   "256": 0.7,
+   "512": 3.3
+  }
+ }
+}

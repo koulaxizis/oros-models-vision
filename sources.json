@@ -130,6 +130,16 @@
    "sha": {
     "realesr-general-x4v3.onnx": "10279d50668a171356ee5e4b4cef12d11037eb338c437d900664eb79a29159d5"
    }
+  },
+  {
+   "dir": "ddcolor",
+   "files": [
+    "ddcolor_tiny.onnx.001",
+    "ddcolor_tiny.onnx.002",
+    "export.json"
+   ],
+   "source": "ONNX export of DDColor tiny (Hugging Face piddnad/ddcolor_paper_tiny) by tools/export_ddcolor.py; ddcolor/export.json has the details and the check against PyTorch",
+   "licence": "Apache-2.0 (ddcolor/LICENSE), (c) the DDColor authors"
   }
  ]
 }
