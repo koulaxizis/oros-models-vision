@@ -21,6 +21,7 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `yunet/` | Blur faces before sharing (detection only, never recognition) | YuNet 2023mar, OpenCV Zoo | MIT | 0.2 MB |
 | `demucs/` | Studio: separate vocals, drums, bass and the rest of a song | Meta Demucs v4 `htdemucs`, our own ONNX export (float16 weights) | MIT | 90 MB |
 | `realesrgan/` | Photo Lab: Enlarge with AI 2×/4× | Real-ESRGAN general x4v3 (SRVGGNetCompact), ONNX written from the official weights | BSD-3-Clause | 4.9 MB |
+| `piper-el-joy/` | Read aloud: the natural Greek voice Joy | Piper voice el_GR-joy-medium (rhasspy/piper-voices), unchanged | CC BY-NC 4.0, non-commercial use only (`piper-el-joy/LICENSE`) | ~63 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
 file, its size and SHA-256, and for the Hugging Face copies the upstream
@@ -73,6 +74,6 @@ difference 1.6e-6) with ONNX Runtime.
    `index.json`. Never edit `index.json` or a model file by hand.
 3. Write the hashes from `index.json` into the orOS code that downloads it.
 
-The site is about 390 MB now; keep it under 1 GB.
+The site is about 450 MB now; keep it under 1 GB.
 
 Security: see [koulaxizis/oros-models SECURITY.md](https://github.com/koulaxizis/oros-models/blob/main/SECURITY.md).
