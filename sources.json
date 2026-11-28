@@ -82,6 +82,31 @@
     "nl/nl_BE/rdh/medium/MODEL_CARD"
    ],
    "licence": "CC0 dataset (Thorsten-Voice, Thorsten Müller); model card: fine-tuned from the rdh base model (nl_BE, CC0); voice de_DE-thorsten-medium of rhasspy/piper-voices (repository MIT) (piper-de-thorsten/LICENSE)"
+  },
+  {
+   "dir": "kokoro-82m",
+   "repo": "onnx-community/Kokoro-82M-v1.0-ONNX",
+   "revision": "main",
+   "files": [
+    "onnx/model_quantized.onnx",
+    "voices/af_heart.bin",
+    "voices/am_michael.bin",
+    "config.json",
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "README.md"
+   ],
+   "licence": "Apache-2.0 (Kokoro-82M by hexgrad, weights and voices; ONNX export by onnx-community) (kokoro-82m/LICENSE)"
+  },
+  {
+   "dir": "kokoro-82m-card",
+   "repo": "hexgrad/Kokoro-82M",
+   "revision": "main",
+   "files": [
+    "README.md",
+    "config.json"
+   ],
+   "licence": "Apache-2.0 (the original model card of Kokoro-82M, kept for its licence and training data statement)"
   }
  ],
  "local": [
@@ -129,6 +154,21 @@
    "licence": "BSD-3-Clause (realesrgan/LICENSE), (c) 2021 Xintao Wang",
    "sha": {
     "realesr-general-x4v3.onnx": "10279d50668a171356ee5e4b4cef12d11037eb338c437d900664eb79a29159d5"
+   }
+  },
+  {
+   "dir": "misaki-en",
+   "files": [
+    "us_gold.json",
+    "us_silver.json",
+    "LICENSE"
+   ],
+   "source": "https://github.com/hexgrad/misaki/tree/fba1236595f2d2bf21d414ba6e57d25256afada3/misaki/data (us_gold.json, us_silver.json; LICENSE from the repository root)",
+   "licence": "Apache-2.0 (misaki-en/LICENSE), (c) hexgrad: the American English pronunciation dictionaries of misaki, Kokoro's G2P",
+   "sha": {
+    "us_gold.json": "dc414872a49a28ae6c141463d502fd945f3b2fde040484fdc47d00cc4612686f",
+    "us_silver.json": "de8f67be911bb6c659187b4a65fd966b6a30e56350e0f790d763210b053ac475",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
    }
   }
  ]
