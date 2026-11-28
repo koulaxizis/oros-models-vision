@@ -72,6 +72,19 @@
    "licence": "Apache-2.0 (Depth Anything V2 Small only; (c) the Depth Anything V2 authors); ONNX export by onnx-community"
   },
   {
+   "dir": "multilingual-e5-small",
+   "repo": "Xenova/multilingual-e5-small",
+   "revision": "main",
+   "files": [
+    "onnx/model_quantized.onnx",
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "special_tokens_map.json",
+    "config.json"
+   ],
+   "licence": "MIT (model, (c) the multilingual-e5 authors, intfloat / Microsoft); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)"
+  },
+  {
    "dir": "florence-2-base-ft",
    "repo": "onnx-community/Florence-2-base-ft",
    "revision": "main",
