@@ -1,0 +1,93 @@
+{
+ "note": "Written by tools/export_movenet.py; never edit by hand.",
+ "model": "MoveNet SinglePose Lightning v4 (float16 TFLite), Google, Apache-2.0",
+ "source": "https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/tflite/float16/4?lite-format=tflite",
+ "sourceSha256": "0fac2226112d0371903ca86e3853cec24ef603a0b2f96f589b180f0ebdd135ab",
+ "onnxSha256": "e74c62a3e9a8d7942355855ba3e9ca6eeb2e06fbcd8e4d8ceb5c291b2a03d663",
+ "input": {
+  "name": "input",
+  "type": "uint8",
+  "shape": [
+   1,
+   192,
+   192,
+   3
+  ],
+  "meaning": "RGB 0..255, square, letterboxed"
+ },
+ "output": {
+  "name": "keypoints",
+  "type": "float32",
+  "shape": [
+   1,
+   1,
+   17,
+   3
+  ],
+  "meaning": "y, x (0..1 of the input), score"
+ },
+ "keypoints": [
+  "nose",
+  "left_eye",
+  "right_eye",
+  "left_ear",
+  "right_ear",
+  "left_shoulder",
+  "right_shoulder",
+  "left_elbow",
+  "right_elbow",
+  "left_wrist",
+  "right_wrist",
+  "left_hip",
+  "right_hip",
+  "left_knee",
+  "right_knee",
+  "left_ankle",
+  "right_ankle"
+ ],
+ "tools": {
+  "python": "3.12.3",
+  "tensorflow": "2.20.0",
+  "tf2onnx": "1.17.0",
+  "onnx": "1.23.2",
+  "onnxruntime": "1.32.0",
+  "numpy": "2.5.5",
+  "scikit-image": "0.26.0",
+  "opset": 17
+ },
+ "check": {
+  "largestDifference": 2.9243528842926025e-06,
+  "perImage": {
+   "astronaut": 1.0728836059570312e-06,
+   "gradient": 2.9243528842926025e-06,
+   "noise": 1.516193151473999e-06
+  },
+  "astronaut": {
+   "nose": [
+    0.2359,
+    0.4327,
+    0.5721
+   ],
+   "left_eye": [
+    0.1969,
+    0.4806,
+    0.7115
+   ],
+   "right_eye": [
+    0.1923,
+    0.3977,
+    0.7179
+   ],
+   "left_shoulder": [
+    0.5331,
+    0.6238,
+    0.7463
+   ],
+   "right_shoulder": [
+    0.501,
+    0.2115,
+    0.6311
+   ]
+  }
+ }
+}

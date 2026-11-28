@@ -5,11 +5,15 @@ Standard library only. For every Hugging Face entry it:
   1. pins the revision (an index.json pin wins over sources.json, so a
      re-run never moves to a newer upstream commit by itself);
   2. reads the upstream file list of that commit;
-  3. downloads each file, refuses anything over 95 MB (GitHub's limit is
-     100 MB per file) and checks it against upstream: LFS files by their
+  3. downloads each file and checks it against upstream: LFS files by their
      SHA-256, small files by their git blob id;
-  4. records size and SHA-256 in index.json (orOS writes these hashes into
-     its own code and checks every download against them).
+  4. splits a file over 95 MB (GitHub's limit is 100 MB per file) into
+     "<file>.part00", "<file>.part01", ... of at most 95 MB each and keeps
+     only the parts (orOS downloads the parts, joins them and checks the
+     whole file's SHA-256);
+  5. records size and SHA-256 in index.json, for a split file also each
+     part's ("parts": [{size, sha}, ...]); orOS writes these hashes into its
+     own code and checks every download against them.
 GitHub entries ("github": repo, revision, files) work the same way with
 the GitHub API: the revision is pinned to a commit and every file must
 match its git blob id in that commit's tree.
@@ -29,7 +33,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HF = "https://huggingface.co"
 GH_API = "https://api.github.com"
 GH_RAW = "https://raw.githubusercontent.com"
-MAX_BYTES = 95 * 1000 * 1000
+PART_BYTES = 95 * 1000 * 1000      # largest file kept in the repository
+MAX_BYTES = 1000 * 1000 * 1000     # largest upstream file accepted at all
 UA = {"User-Agent": "oros-models-vision-mirror"}
 
 
@@ -64,12 +69,58 @@ def download(url, dest):
             for chunk in iter(lambda: r.read(1 << 20), b""):
                 n += len(chunk)
                 if n > MAX_BYTES:
-                    raise SystemExit("too big (> 95 MB): " + url)
+                    raise SystemExit("too big (> 1 GB): " + url)
                 out.write(chunk)
         os.replace(tmp, dest)
     finally:
         if os.path.exists(tmp):
             os.remove(tmp)
+
+
+def part_path(dest, i):
+    return "%s.part%02d" % (dest, i)
+
+
+def split(dest):
+    """Cut dest into parts of at most PART_BYTES, remove it, return the parts' records."""
+    parts = []
+    with open(dest, "rb") as f:
+        i = 0
+        while True:
+            chunk = f.read(PART_BYTES)
+            if not chunk:
+                break
+            with open(part_path(dest, i), "wb") as out:
+                out.write(chunk)
+            parts.append({"size": len(chunk), "sha": hashlib.sha256(chunk).hexdigest()})
+            i += 1
+    os.remove(dest)
+    return parts
+
+
+def parts_ok(dest, rec):
+    """True when every recorded part is here with its hash and they join to the whole file's hash."""
+    parts = rec.get("parts") or []
+    if not parts:
+        return False
+    whole = hashlib.sha256()
+    for i, p in enumerate(parts):
+        path = part_path(dest, i)
+        if not os.path.exists(path) or os.path.getsize(path) != p.get("size"):
+            return False
+        with open(path, "rb") as f:
+            data = f.read()
+        if hashlib.sha256(data).hexdigest() != p.get("sha"):
+            return False
+        whole.update(data)
+    if os.path.exists(part_path(dest, len(parts))):
+        return False
+    return whole.hexdigest() == rec.get("sha") and sum(p["size"] for p in parts) == rec.get("size")
+
+
+def whole_ok(dest, rec):
+    return (not rec.get("parts") and bool(rec.get("sha")) and os.path.exists(dest)
+            and sha256_of(dest) == rec["sha"])
 
 
 def main():
@@ -93,8 +144,8 @@ def main():
             rev = rev or src["revision"]
             for p in src["files"]:
                 dest = os.path.join(ROOT, d, p)
-                want = prev.get("files", {}).get(p, {}).get("sha")
-                if not os.path.exists(dest) or sha256_of(dest) != want:
+                rec = prev.get("files", {}).get(p, {})
+                if not (whole_ok(dest, rec) or parts_ok(dest, rec)):
                     bad.append(d + "/" + p)
             models[d] = prev
             continue
@@ -112,18 +163,28 @@ def main():
             if not t:
                 raise SystemExit("not upstream: %s %s" % (repo, p))
             dest = os.path.join(ROOT, d, p)
-            known = prev.get("files", {}).get(p, {}).get("sha")
-            if not (known and os.path.exists(dest) and sha256_of(dest) == known):
+            rec = prev.get("files", {}).get(p, {})
+            lfs = t.get("lfs")
+            if parts_ok(dest, rec):
+                # Already split here; the parts join to the recorded hash,
+                # which was checked against upstream when they were made.
+                if lfs and (rec["sha"] != lfs.get("oid") or rec["size"] != lfs.get("size")):
+                    raise SystemExit("hash differs from upstream LFS: %s %s" % (repo, p))
+                files[p] = {"size": rec["size"], "sha": rec["sha"], "parts": rec["parts"]}
+                continue
+            if not whole_ok(dest, rec):
                 print("download", repo, p, flush=True)
                 download("%s/%s/resolve/%s/%s" % (HF, repo, rev, p), dest)
             sha = sha256_of(dest)
-            lfs = t.get("lfs")
             if lfs:
                 if sha != lfs.get("oid") or os.path.getsize(dest) != lfs.get("size"):
                     raise SystemExit("hash differs from upstream LFS: %s %s" % (repo, p))
             elif git_blob_id(dest) != t.get("oid"):
                 raise SystemExit("git blob id differs from upstream: %s %s" % (repo, p))
             files[p] = {"size": os.path.getsize(dest), "sha": sha}
+            if files[p]["size"] > PART_BYTES:
+                print("split", repo, p, flush=True)
+                files[p]["parts"] = split(dest)
         others = sorted((t["path"], t["size"]) for t in tree
                         if t.get("type") == "file" and t["path"].startswith("onnx/"))
         models[d] = {
@@ -166,6 +227,8 @@ def main():
                 download("%s/%s/%s/%s" % (GH_RAW, repo, rev, p), dest)
             if git_blob_id(dest) != t.get("sha"):
                 raise SystemExit("git blob id differs from upstream: %s %s" % (repo, p))
+            if os.path.getsize(dest) > PART_BYTES:
+                raise SystemExit("too big for a github entry: %s %s" % (repo, p))
             files[p] = {"size": os.path.getsize(dest), "sha": sha256_of(dest), "file": os.path.basename(p)}
         models[d] = {
             "host": "github",
