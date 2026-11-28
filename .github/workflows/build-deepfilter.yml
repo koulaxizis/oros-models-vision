@@ -1,0 +1,56 @@
+name: Build DeepFilterNet
+
+# Makes deepfilter/deepfilter.wasm (DeepFilterNet3 voice noise removal) from
+# the official Rikorose/DeepFilterNet source and model (tools/deepfilter/
+# build.py), checks it against a native build of the same code, adds the
+# "deepfilter" entry to sources.json the first time, writes index.json
+# (tools/mirror.py) and commits the result to the branch that was pushed.
+on:
+  push:
+    branches: ["claude/**"]
+    paths: ["tools/deepfilter/**", ".github/workflows/build-deepfilter.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Tools (pinned)
+        run: |
+          rustup toolchain install 1.97.0 --profile minimal --target wasm32-unknown-unknown
+          python3 -m venv /tmp/venv
+          /tmp/venv/bin/pip install --quiet numpy==2.5.5
+      - run: /tmp/venv/bin/python tools/deepfilter/build.py
+      - name: Add the sources.json entry (first run only)
+        run: |
+          python3 - <<'PY'
+          import json
+          p = "sources.json"
+          s = json.load(open(p, encoding="utf-8"))
+          if not any(e.get("dir") == "deepfilter" for e in s.get("local", [])):
+              s.setdefault("local", []).append({
+                  "dir": "deepfilter",
+                  "files": ["deepfilter.wasm", "build.json", "LICENSE-MIT", "LICENSE-APACHE"],
+                  "source": "WebAssembly build of the official DeepFilterNet libDF runtime with the official DeepFilterNet3 model built in, by tools/deepfilter/build.py; deepfilter/build.json has the upstream commit, hashes and the check against the native build",
+                  "licence": "MIT or Apache-2.0 (deepfilter/LICENSE-MIT, deepfilter/LICENSE-APACHE), (c) Hendrik Schroeter",
+              })
+              with open(p, "w", encoding="utf-8") as f:
+                  json.dump(s, f, indent=1, ensure_ascii=False)
+                  f.write("\n")
+          PY
+      - run: python3 tools/mirror.py
+      - run: python3 tools/mirror.py --check
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add -A deepfilter sources.json index.json
+          if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+          git commit -m "Build DeepFilterNet3 to WebAssembly (tools/deepfilter/build.py)"
+          git push
