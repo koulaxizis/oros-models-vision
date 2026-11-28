@@ -22,11 +22,18 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `demucs/` | Studio: separate vocals, drums, bass and the rest of a song | Meta Demucs v4 `htdemucs`, our own ONNX export (float16 weights) | MIT | 90 MB |
 | `realesrgan/` | Photo Lab: Enlarge with AI 2×/4× | Real-ESRGAN general x4v3 (SRVGGNetCompact), ONNX written from the official weights | BSD-3-Clause | 4.9 MB |
 | `piper-el-joy/` | Read aloud: the natural Greek voice Joy | Piper voice el_GR-joy-medium (rhasspy/piper-voices), unchanged | CC BY-NC 4.0, non-commercial use only (`piper-el-joy/LICENSE`) | ~63 MB |
+| `piper-de-thorsten/` | Read aloud: the natural German voice Thorsten | Piper voice de_DE-thorsten-medium (rhasspy/piper-voices), unchanged | CC0 recordings, base model CC0 (`piper-de-thorsten/LICENSE`) | ~63 MB |
+| `kokoro-82m/` | Read aloud: the natural English voices Heart and Michael | Kokoro-82M v1.0 by hexgrad, 8-bit ONNX export by onnx-community, voices af_heart and am_michael, unchanged | Apache-2.0 (`kokoro-82m/LICENSE`, with the CC BY credits of its training audio) | ~93 MB |
+| `kokoro-82m-card/` | The model card of Kokoro-82M (licence and training data) | hexgrad/Kokoro-82M | Apache-2.0 | <0.1 MB |
+| `misaki-en/` | Read aloud: how English words are said (for the Kokoro voices) | misaki US English dictionaries by hexgrad (us_gold, us_silver), unchanged | Apache-2.0 (`misaki-en/LICENSE`) | ~6 MB |
 | `depth-anything-v2-small/` | Photo Lab: Portrait blur (background blur by depth) | Depth Anything V2 Small, int8 ONNX export by onnx-community | Apache-2.0 (Small only) | ~25 MB |
 | `multilingual-e5-small/` | Search by meaning in Notes, Mail, Files, Reader and the Assistant (Greek, English, German and more) | intfloat multilingual-e5-small, int8 ONNX export by Xenova (model split into parts) | MIT (model), Apache-2.0 (export) | ~135 MB |
 | `slimsam-77-uniform/` | Photo Lab: Smart select; Atelier: Pick an object (click an object, get its outline) | SlimSAM-77 uniform (pruned Segment Anything), int8 ONNX export by Xenova | Apache-2.0 | ~14 MB |
 | `ddcolor/` | Photo Lab, Atelier: Colourize black-and-white photos | DDColor tiny (ICCV 2023), our own ONNX export (float16 weights, in parts) | Apache-2.0 | 136 MB |
 | `silero-vad/` | Notes dictation, Montage's Remove silences, the Assistant's voice input: finds where someone speaks | Silero VAD v6.2 (snakers4/silero-vad), unchanged | MIT | 2.3 MB |
+| `movenet/` | Workouts: count repetitions with the camera (body keypoints only) | Google MoveNet SinglePose Lightning v4, ONNX converted from the float16 TFLite release | Apache-2.0 | 9.4 MB |
+| `deepfilter/` | Studio, Montage, Notes: clean noise out of a voice | DeepFilterNet3 (official libDF runtime and model), our own WebAssembly build | MIT or Apache-2.0 | 14 MB |
+| `basic-pitch/` | Studio: sound to MIDI notes | Spotify Basic Pitch `nmp.onnx`, unchanged | Apache-2.0 | 0.2 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
 file, its size and SHA-256, and for the Hugging Face copies the upstream
@@ -70,6 +77,21 @@ refuses the file unless the whole separation as orOS does it
 at least 50 dB. `demucs/export.json` records the checkpoint's hash, the tool
 versions and the check's result.
 
+`deepfilter/` is not a copy: DeepFilterNet ships its runtime as Rust.
+`tools/deepfilter/build.py` (workflow `.github/workflows/build-deepfilter.yml`)
+fetches the pinned upstream commit, checks the DeepFilterNet3 model archive's
+SHA-256, and builds the official libDF runtime (tract) with that model inside,
+behind the small C ABI in `tools/deepfilter/src/lib.rs`, for wasm32 with SIMD.
+The module imports nothing: orOS runs it with `WebAssembly.instantiate(bytes,
+{})`, no JavaScript glue and no eval. Every crate is pinned by
+`tools/deepfilter/Cargo.lock`. The build is refused unless its output equals
+a native build of the same code within float rounding (at least 100 dB) and
+pure noise is cut by about 24 dB with a 24 dB limit; `deepfilter/build.json`
+records the commit, the hashes and the check.
+
+`basic-pitch/` is a GitHub source in `sources.json`: `tools/mirror.py` pins
+the commit and checks each file's git blob id in that commit's tree.
+
 `realesrgan/` is not a copy either: its upstream release is only a PyTorch
 `.pth`. `tools/convert_realesrgan.py` reads the official
 `realesr-general-x4v3.pth` (release v0.2.5.0, SHA-256 checked) with the
@@ -99,6 +121,16 @@ its `local` entry pins the whole file's SHA-256 and `index.json` records the
 parts. `ddcolor/export.json` records the hashes, the tool versions and the
 check.
 
+`movenet/` is not a copy either: Google publishes MoveNet only as TFLite and
+TensorFlow models. `tools/export_movenet.py` (workflow
+`.github/workflows/export-movenet.yml`) downloads the float16 TFLite release,
+converts it with tf2onnx (opset 17), renames the input to `input` (uint8
+`[1, 192, 192, 3]`, RGB 0..255) and the output to `keypoints` (float32
+`[1, 1, 17, 3]`: y, x, score), and refuses the file unless ONNX Runtime gives
+the same keypoints as the TFLite interpreter (largest difference under 1e-4)
+and finds the person in a test photo. `movenet/export.json` records the
+source, both hashes, the tool versions and the check.
+
 ### Adding a model
 
 1. Add it to `sources.json` (Hugging Face: `repo`, `revision`, `files`,
@@ -107,7 +139,7 @@ check.
    `index.json`. Never edit `index.json` or a model file by hand.
 3. Write the hashes from `index.json` into the orOS code that downloads it.
 
-The site is about 750 MB with `slimsam-77-uniform/` and `ddcolor/`; keep it under 1 GB.
+The site is about 970 MB (920 MiB) with `slimsam-77-uniform/` and `ddcolor/`; GitHub Pages allows 1 GB, so this repository is full: new models go elsewhere.
 Models too big for that (Whisper small, Florence-2) go to a third repository.
 
 Security: see [koulaxizis/oros-models SECURITY.md](https://github.com/koulaxizis/oros-models/blob/main/SECURITY.md).

@@ -1,0 +1,26 @@
+[package]
+name = "oros-deepfilter"
+version = "1.0.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+deep_filter = { path = "../../build/DeepFilterNet/libDF", default-features = false, features = ["tract", "default-model"] }
+ndarray = "^0.15"
+
+[profile.release]
+opt-level = "s"
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = true
+debug = false
+
+# tract-onnx-opl links rand for ONNX random ops, which DFN3 never uses:
+# no entropy source in the module (it imports nothing); a call would fail.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "0.2", features = ["custom"] }

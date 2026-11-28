@@ -1,0 +1,57 @@
+name: Export MoveNet
+
+# Makes movenet/movenet-lightning.onnx from Google's MoveNet TFLite release
+# (tools/export_movenet.py), checks it against the TFLite interpreter, adds
+# the "movenet" entry to sources.json the first time, writes index.json
+# (tools/mirror.py) and commits the result to the branch that was pushed.
+on:
+  push:
+    branches: ["claude/**"]
+    paths: ["tools/export_movenet.py", ".github/workflows/export-movenet.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Tools (pinned)
+        run: |
+          python3 --version
+          python3 -m venv /tmp/venv
+          /tmp/venv/bin/pip install --quiet tensorflow-cpu==2.20.0 tf2onnx==1.17.0 onnx==1.23.2 onnxruntime==1.32.0 numpy==2.5.5 scikit-image==0.26.0
+      - run: /tmp/venv/bin/python tools/export_movenet.py
+      - name: Add the sources.json entry (first run only)
+        run: |
+          python3 - <<'PY'
+          import json
+          p = "sources.json"
+          s = json.load(open(p, encoding="utf-8"))
+          if not any(e.get("dir") == "movenet" for e in s.get("local", [])):
+              s.setdefault("local", []).append({
+                  "dir": "movenet",
+                  "files": ["movenet-lightning.onnx", "export.json"],
+                  "source": "ONNX conversion of Google's MoveNet SinglePose Lightning v4 (float16 TFLite) by tools/export_movenet.py; movenet/export.json has the details and the check against TFLite",
+                  "licence": "Apache-2.0 (movenet/LICENSE), (c) Google LLC",
+              })
+              with open(p, "w", encoding="utf-8") as f:
+                  json.dump(s, f, indent=1, ensure_ascii=False)
+                  f.write("\n")
+          PY
+      - run: python3 tools/mirror.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - run: python3 tools/mirror.py --check
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add -A movenet sources.json index.json
+          if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+          git commit -m "Convert MoveNet Lightning to ONNX (tools/export_movenet.py)"
+          git push

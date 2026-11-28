@@ -72,6 +72,43 @@
    "licence": "Apache-2.0 (Depth Anything V2 Small only; (c) the Depth Anything V2 authors); ONNX export by onnx-community"
   },
   {
+   "dir": "piper-de-thorsten",
+   "repo": "rhasspy/piper-voices",
+   "revision": "main",
+   "files": [
+    "de/de_DE/thorsten/medium/de_DE-thorsten-medium.onnx",
+    "de/de_DE/thorsten/medium/de_DE-thorsten-medium.onnx.json",
+    "de/de_DE/thorsten/medium/MODEL_CARD",
+    "nl/nl_BE/rdh/medium/MODEL_CARD"
+   ],
+   "licence": "CC0 dataset (Thorsten-Voice, Thorsten Müller); model card: fine-tuned from the rdh base model (nl_BE, CC0); voice de_DE-thorsten-medium of rhasspy/piper-voices (repository MIT) (piper-de-thorsten/LICENSE)"
+  },
+  {
+   "dir": "kokoro-82m",
+   "repo": "onnx-community/Kokoro-82M-v1.0-ONNX",
+   "revision": "main",
+   "files": [
+    "onnx/model_quantized.onnx",
+    "voices/af_heart.bin",
+    "voices/am_michael.bin",
+    "config.json",
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "README.md"
+   ],
+   "licence": "Apache-2.0 (Kokoro-82M by hexgrad, weights and voices; ONNX export by onnx-community) (kokoro-82m/LICENSE)"
+  },
+  {
+   "dir": "kokoro-82m-card",
+   "repo": "hexgrad/Kokoro-82M",
+   "revision": "main",
+   "files": [
+    "README.md",
+    "config.json"
+   ],
+   "licence": "Apache-2.0 (the original model card of Kokoro-82M, kept for its licence and training data statement)"
+  },
+  {
    "dir": "multilingual-e5-small",
    "repo": "Xenova/multilingual-e5-small",
    "revision": "main",
@@ -145,6 +182,21 @@
    }
   },
   {
+   "dir": "misaki-en",
+   "files": [
+    "us_gold.json",
+    "us_silver.json",
+    "LICENSE"
+   ],
+   "source": "https://github.com/hexgrad/misaki/tree/fba1236595f2d2bf21d414ba6e57d25256afada3/misaki/data (us_gold.json, us_silver.json; LICENSE from the repository root)",
+   "licence": "Apache-2.0 (misaki-en/LICENSE), (c) hexgrad: the American English pronunciation dictionaries of misaki, Kokoro's G2P",
+   "sha": {
+    "us_gold.json": "dc414872a49a28ae6c141463d502fd945f3b2fde040484fdc47d00cc4612686f",
+    "us_silver.json": "de8f67be911bb6c659187b4a65fd966b6a30e56350e0f790d763210b053ac475",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+   }
+  },
+  {
    "dir": "silero-vad",
    "files": [
     "silero_vad.onnx"
@@ -166,6 +218,42 @@
    },
    "source": "ONNX export of DDColor tiny (Hugging Face piddnad/ddcolor_paper_tiny) by tools/export_ddcolor.py; ddcolor/export.json has the details and the check against PyTorch",
    "licence": "Apache-2.0 (ddcolor/LICENSE), (c) the DDColor authors"
+  },
+  {
+   "dir": "movenet",
+   "files": [
+    "movenet-lightning.onnx",
+    "export.json"
+   ],
+   "source": "ONNX conversion of Google's MoveNet SinglePose Lightning v4 (float16 TFLite) by tools/export_movenet.py; movenet/export.json has the details and the check against TFLite",
+   "licence": "Apache-2.0 (movenet/LICENSE), (c) Google LLC",
+   "sha": {
+    "movenet-lightning.onnx": "e74c62a3e9a8d7942355855ba3e9ca6eeb2e06fbcd8e4d8ceb5c291b2a03d663",
+    "export.json": "1630fdf420137230249ca33c80b0926608cf313fed9bf5e4e5b3468f8cb67fd3"
+   }
+  },
+  {
+   "dir": "deepfilter",
+   "files": [
+    "deepfilter.wasm",
+    "build.json",
+    "LICENSE-MIT",
+    "LICENSE-APACHE"
+   ],
+   "source": "WebAssembly build of the official DeepFilterNet libDF runtime with the official DeepFilterNet3 model built in, by tools/deepfilter/build.py; deepfilter/build.json has the upstream commit, hashes and the check against the native build",
+   "licence": "MIT or Apache-2.0 (deepfilter/LICENSE-MIT, deepfilter/LICENSE-APACHE), (c) Hendrik Schroeter"
+  }
+ ],
+ "github": [
+  {
+   "dir": "basic-pitch",
+   "repo": "spotify/basic-pitch",
+   "revision": "main",
+   "files": [
+    "basic_pitch/saved_models/icassp_2022/nmp.onnx",
+    "LICENSE"
+   ],
+   "licence": "Apache-2.0 (basic-pitch/LICENSE), (c) 2022 Spotify AB"
   }
  ]
 }
