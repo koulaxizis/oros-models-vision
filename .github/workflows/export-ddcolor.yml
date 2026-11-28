@@ -1,0 +1,65 @@
+name: Export DDColor
+
+# Makes ddcolor/ddcolor_tiny.onnx (parts .part00, .part01 … when over 95 MB) from
+# the authors' own weights (tools/export_ddcolor.py), checks the colours
+# against PyTorch, adds the "ddcolor" entry to sources.json the first time,
+# writes index.json (tools/mirror.py) and commits the result to the branch
+# that was pushed. Once ddcolor/export.json is there with matching files, a
+# run changes nothing.
+on:
+  push:
+    branches: ["claude/**"]
+    paths: ["tools/export_ddcolor.py", ".github/workflows/export-ddcolor.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: DDColor source (pinned commit)
+        run: |
+          git init -q /tmp/ddcolor
+          git -C /tmp/ddcolor fetch -q --depth 1 https://github.com/piddnad/DDColor.git 2adb63f2656ac41cbdf7b894cddd94121a3faf13
+          git -C /tmp/ddcolor checkout -q FETCH_HEAD
+      - name: Tools (pinned)
+        run: |
+          python3 -m venv /tmp/venv
+          /tmp/venv/bin/pip install --quiet torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
+          /tmp/venv/bin/pip install --quiet onnx==1.23.2 onnxruntime==1.32.0 numpy==2.5.5 pillow==12.0.0
+      - run: DDCOLOR_SRC=/tmp/ddcolor /tmp/venv/bin/python tools/export_ddcolor.py
+      - name: Add the sources.json entry (the whole file; mirror.py records its parts)
+        run: |
+          python3 - <<'PY'
+          import json
+          info = json.load(open("ddcolor/export.json", encoding="utf-8"))
+          p = "sources.json"
+          s = json.load(open(p, encoding="utf-8"))
+          s["local"] = [e for e in s.get("local", []) if e.get("dir") != "ddcolor"]
+          s["local"].append({
+              "dir": "ddcolor",
+              "files": [info["whole"]["name"], "export.json"],
+              "sha": {info["whole"]["name"]: info["whole"]["sha"]},
+              "source": "ONNX export of DDColor tiny (Hugging Face piddnad/ddcolor_paper_tiny) by tools/export_ddcolor.py; ddcolor/export.json has the details and the check against PyTorch",
+              "licence": "Apache-2.0 (ddcolor/LICENSE), (c) the DDColor authors",
+          })
+          with open(p, "w", encoding="utf-8") as f:
+              json.dump(s, f, indent=1, ensure_ascii=False)
+              f.write("\n")
+          PY
+      - run: python3 tools/mirror.py
+      - run: python3 tools/mirror.py --check
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add -A ddcolor sources.json index.json
+          if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+          git commit -m "Export DDColor tiny to ONNX (tools/export_ddcolor.py)"
+          git pull --rebase --quiet origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

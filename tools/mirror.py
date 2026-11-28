@@ -123,6 +123,21 @@ def parts_ok(dest, rec):
     return whole.hexdigest() == rec.get("sha") and sum(p["size"] for p in parts) == rec.get("size")
 
 
+def local_parts(dest):
+    """A local file kept as dest.part00, .part01 ...: the record the parts make
+    (each part's size and hash, and the joined file's), as for a split download."""
+    parts, whole, i = [], hashlib.sha256(), 0
+    while os.path.exists(part_path(dest, i)):
+        with open(part_path(dest, i), "rb") as f:
+            data = f.read()
+        if len(data) > PART_BYTES:
+            raise SystemExit("part over 95 MB: " + part_path(dest, i))
+        parts.append({"size": len(data), "sha": hashlib.sha256(data).hexdigest()})
+        whole.update(data)
+        i += 1
+    return {"size": sum(p["size"] for p in parts), "sha": whole.hexdigest(), "parts": parts}
+
+
 def whole_ok(dest, rec):
     return (not rec.get("parts") and bool(rec.get("sha")) and os.path.exists(dest)
             and sha256_of(dest) == rec["sha"])
@@ -249,6 +264,13 @@ def main():
         files = {}
         for p in src["files"]:
             dest = os.path.join(ROOT, d, p)
+            if not os.path.exists(dest) and os.path.exists(part_path(dest, 0)):
+                # kept in parts (made here over 95 MB, e.g. tools/export_ddcolor.py)
+                rec = local_parts(dest)
+                if src.get("sha", {}).get(p) and src["sha"][p] != rec["sha"]:
+                    bad.append(d + "/" + p)
+                files[p] = rec
+                continue
             if not os.path.exists(dest):
                 raise SystemExit("missing local file: " + d + "/" + p)
             sha = sha256_of(dest)

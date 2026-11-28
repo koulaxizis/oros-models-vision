@@ -127,6 +127,27 @@ class SplitTest(unittest.TestCase):
         with self.assertRaises(SystemExit):
             self.run_mirror()
 
+    def test_local_file_in_parts_is_recorded_like_a_split_download(self):
+        with open(os.path.join(self.root, "sources.json"), "w") as f:
+            json.dump({"local": [{"dir": "l", "files": ["big.onnx"],
+                                  "sha": {"big.onnx": hashlib.sha256(BIG).hexdigest()}}]}, f)
+        base = os.path.join(self.root, "l", "big.onnx")
+        os.makedirs(os.path.dirname(base))
+        for i in range(3):
+            with open("%s.part%02d" % (base, i), "wb") as f:
+                f.write(BIG[i * 4000:(i + 1) * 4000])
+        self.run_mirror()
+        with open(os.path.join(self.root, "index.json")) as f:
+            rec = json.load(f)["models"]["l"]["files"]["big.onnx"]
+        self.assertEqual(rec["size"], len(BIG))
+        self.assertEqual(rec["sha"], hashlib.sha256(BIG).hexdigest())
+        self.assertEqual([p["size"] for p in rec["parts"]], [4000, 4000, 2496])
+        self.run_mirror("--check")
+        with open(base + ".part02", "r+b") as f:
+            f.write(b"\0")
+        with self.assertRaises(SystemExit):
+            self.run_mirror("--check")
+
 
 if __name__ == "__main__":
     unittest.main()

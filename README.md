@@ -28,6 +28,8 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `misaki-en/` | Read aloud: how English words are said (for the Kokoro voices) | misaki US English dictionaries by hexgrad (us_gold, us_silver), unchanged | Apache-2.0 (`misaki-en/LICENSE`) | ~6 MB |
 | `depth-anything-v2-small/` | Photo Lab: Portrait blur (background blur by depth) | Depth Anything V2 Small, int8 ONNX export by onnx-community | Apache-2.0 (Small only) | ~25 MB |
 | `multilingual-e5-small/` | Search by meaning in Notes, Mail, Files, Reader and the Assistant (Greek, English, German and more) | intfloat multilingual-e5-small, int8 ONNX export by Xenova (model split into parts) | MIT (model), Apache-2.0 (export) | ~135 MB |
+| `slimsam-77-uniform/` | Photo Lab: Smart select; Atelier: Pick an object (click an object, get its outline) | SlimSAM-77 uniform (pruned Segment Anything), int8 ONNX export by Xenova | Apache-2.0 | ~14 MB |
+| `ddcolor/` | Photo Lab, Atelier: Colourize black-and-white photos | DDColor tiny (ICCV 2023), our own ONNX export (float16 weights, in parts) | Apache-2.0 | 136 MB |
 | `silero-vad/` | Notes dictation, Montage's Remove silences, the Assistant's voice input: finds where someone speaks | Silero VAD v6.2 (snakers4/silero-vad), unchanged | MIT | 2.3 MB |
 | `movenet/` | Workouts: count repetitions with the camera (body keypoints only) | Google MoveNet SinglePose Lightning v4, ONNX converted from the float16 TFLite release | Apache-2.0 | 9.4 MB |
 | `deepfilter/` | Studio, Montage, Notes: clean noise out of a voice | DeepFilterNet3 (official libDF runtime and model), our own WebAssembly build | MIT or Apache-2.0 | 14 MB |
@@ -105,6 +107,20 @@ an ONNX graph (opset 17, input RGB 0..1 `[1, 3, H, W]`, output `[1, 3, 4H,
 It was checked against a plain numpy run of the PyTorch network (largest
 difference 1.6e-6) with ONNX Runtime.
 
+`ddcolor/` is our own export too: the authors publish DDColor only as PyTorch
+weights. `tools/export_ddcolor.py` (workflow
+`.github/workflows/export-ddcolor.yml`) takes the network code from
+piddnad/DDColor at a pinned commit, downloads `pytorch_model.bin` of
+`piddnad/ddcolor_paper_tiny` at a pinned revision and checks its SHA-256,
+exports one ONNX graph with any height and width (multiples of 32; input the
+picture's lightness as grey RGB 0..1, output its a\*b\* in CIE Lab), stores the
+weights as float16, and refuses the file unless its colours match PyTorch's
+at 256 and 512 px by at least 40 dB (it reached 78.8 dB). The file is 136 MB,
+so it is cut like a big download (`ddcolor_tiny.onnx.part00`, `.part01`);
+its `local` entry pins the whole file's SHA-256 and `index.json` records the
+parts. `ddcolor/export.json` records the hashes, the tool versions and the
+check.
+
 `movenet/` is not a copy either: Google publishes MoveNet only as TFLite and
 TensorFlow models. `tools/export_movenet.py` (workflow
 `.github/workflows/export-movenet.yml`) downloads the float16 TFLite release,
@@ -123,7 +139,7 @@ source, both hashes, the tool versions and the check.
    `index.json`. Never edit `index.json` or a model file by hand.
 3. Write the hashes from `index.json` into the orOS code that downloads it.
 
-The site is about 615 MB with `multilingual-e5-small/`; keep it under 1 GB.
+The site is about 970 MB (920 MiB) with `slimsam-77-uniform/` and `ddcolor/`; GitHub Pages allows 1 GB, so this repository is full: new models go elsewhere.
 Models too big for that (Whisper small, Florence-2) go to a third repository.
 
 Security: see [koulaxizis/oros-models SECURITY.md](https://github.com/koulaxizis/oros-models/blob/main/SECURITY.md).

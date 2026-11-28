@@ -120,6 +120,18 @@
     "config.json"
    ],
    "licence": "MIT (model, (c) the multilingual-e5 authors, intfloat / Microsoft); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)"
+  },
+  {
+   "dir": "slimsam-77-uniform",
+   "repo": "Xenova/slimsam-77-uniform",
+   "revision": "main",
+   "files": [
+    "onnx/vision_encoder_quantized.onnx",
+    "onnx/prompt_encoder_mask_decoder_quantized.onnx",
+    "config.json",
+    "preprocessor_config.json"
+   ],
+   "licence": "Apache-2.0 (slimsam-77-uniform/LICENSE): SlimSAM (c) Zigeng Chen et al., Segment Anything (c) Meta; ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)"
   }
  ],
  "local": [
@@ -194,6 +206,18 @@
    "sha": {
     "silero_vad.onnx": "1a153a22f4509e292a94e67d6f9b85e8deb25b4988682b7e174c65279d8788e3"
    }
+  },
+  {
+   "dir": "ddcolor",
+   "files": [
+    "ddcolor_tiny.onnx",
+    "export.json"
+   ],
+   "sha": {
+    "ddcolor_tiny.onnx": "422bfa6f6d27d57106412d70874b4b8468bb29b777f16e3e15dfc9958f5b72cf"
+   },
+   "source": "ONNX export of DDColor tiny (Hugging Face piddnad/ddcolor_paper_tiny) by tools/export_ddcolor.py; ddcolor/export.json has the details and the check against PyTorch",
+   "licence": "Apache-2.0 (ddcolor/LICENSE), (c) the DDColor authors"
   },
   {
    "dir": "movenet",
