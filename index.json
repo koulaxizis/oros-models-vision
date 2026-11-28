@@ -934,6 +934,20 @@
      "sha": "10279d50668a171356ee5e4b4cef12d11037eb338c437d900664eb79a29159d5"
     }
    }
+  },
+  "movenet": {
+   "source": "ONNX conversion of Google's MoveNet SinglePose Lightning v4 (float16 TFLite) by tools/export_movenet.py; movenet/export.json has the details and the check against TFLite",
+   "licence": "Apache-2.0 (movenet/LICENSE), (c) Google LLC",
+   "files": {
+    "movenet-lightning.onnx": {
+     "size": 9402918,
+     "sha": "e74c62a3e9a8d7942355855ba3e9ca6eeb2e06fbcd8e4d8ceb5c291b2a03d663"
+    },
+    "export.json": {
+     "size": 1727,
+     "sha": "1630fdf420137230249ca33c80b0926608cf313fed9bf5e4e5b3468f8cb67fd3"
+    }
+   }
   }
  }
 }
