@@ -45,6 +45,8 @@ jobs:
                   f.write("\n")
           PY
       - run: python3 tools/mirror.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - run: python3 tools/mirror.py --check
       - name: Commit
         run: |

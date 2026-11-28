@@ -39,7 +39,12 @@ UA = {"User-Agent": "oros-models-vision-mirror"}
 
 
 def get_json(url):
-    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as r:
+    headers = dict(UA)
+    # GitHub's API allows few calls without a token from a shared runner
+    # address; in Actions the workflow passes its own read token.
+    if url.startswith(GH_API + "/") and os.environ.get("GITHUB_TOKEN"):
+        headers["Authorization"] = "Bearer " + os.environ["GITHUB_TOKEN"]
+    with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=60) as r:
         return json.load(r)
 
 
