@@ -23,6 +23,8 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `realesrgan/` | Photo Lab: Enlarge with AI 2×/4× | Real-ESRGAN general x4v3 (SRVGGNetCompact), ONNX written from the official weights | BSD-3-Clause | 4.9 MB |
 | `piper-el-joy/` | Read aloud: the natural Greek voice Joy | Piper voice el_GR-joy-medium (rhasspy/piper-voices), unchanged | CC BY-NC 4.0, non-commercial use only (`piper-el-joy/LICENSE`) | ~63 MB |
 | `depth-anything-v2-small/` | Photo Lab: Portrait blur (background blur by depth) | Depth Anything V2 Small, int8 ONNX export by onnx-community | Apache-2.0 (Small only) | ~25 MB |
+| `deepfilter/` | Studio, Montage, Notes: clean noise out of a voice | DeepFilterNet3 (official libDF runtime and model), our own WebAssembly build | MIT or Apache-2.0 | 14 MB |
+| `basic-pitch/` | Studio: sound to MIDI notes | Spotify Basic Pitch `nmp.onnx`, unchanged | Apache-2.0 | 0.2 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
 file, its size and SHA-256, and for the Hugging Face copies the upstream
@@ -52,6 +54,21 @@ refuses the file unless the whole separation as orOS does it
 at least 50 dB. `demucs/export.json` records the checkpoint's hash, the tool
 versions and the check's result.
 
+`deepfilter/` is not a copy: DeepFilterNet ships its runtime as Rust.
+`tools/deepfilter/build.py` (workflow `.github/workflows/build-deepfilter.yml`)
+fetches the pinned upstream commit, checks the DeepFilterNet3 model archive's
+SHA-256, and builds the official libDF runtime (tract) with that model inside,
+behind the small C ABI in `tools/deepfilter/src/lib.rs`, for wasm32 with SIMD.
+The module imports nothing: orOS runs it with `WebAssembly.instantiate(bytes,
+{})`, no JavaScript glue and no eval. Every crate is pinned by
+`tools/deepfilter/Cargo.lock`. The build is refused unless its output equals
+a native build of the same code within float rounding (at least 100 dB) and
+pure noise is cut by about 24 dB with a 24 dB limit; `deepfilter/build.json`
+records the commit, the hashes and the check.
+
+`basic-pitch/` is a GitHub source in `sources.json`: `tools/mirror.py` pins
+the commit and checks each file's git blob id in that commit's tree.
+
 `realesrgan/` is not a copy either: its upstream release is only a PyTorch
 `.pth`. `tools/convert_realesrgan.py` reads the official
 `realesr-general-x4v3.pth` (release v0.2.5.0, SHA-256 checked) with the
@@ -75,6 +92,6 @@ difference 1.6e-6) with ONNX Runtime.
    `index.json`. Never edit `index.json` or a model file by hand.
 3. Write the hashes from `index.json` into the orOS code that downloads it.
 
-The site is about 450 MB now; keep it under 1 GB.
+The site is about 510 MB now; keep it under 1 GB.
 
 Security: see [koulaxizis/oros-models SECURITY.md](https://github.com/koulaxizis/oros-models/blob/main/SECURITY.md).
