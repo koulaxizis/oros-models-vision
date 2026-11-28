@@ -27,12 +27,12 @@
  },
  "files": [
   {
-   "name": "ddcolor_tiny.onnx.001",
+   "name": "ddcolor_tiny.onnx.part00",
    "size": 95000000,
    "sha": "f5d5a5408245c2a71250ad4f13305d1ebb5f2e412b882c513fd3440af4657307"
   },
   {
-   "name": "ddcolor_tiny.onnx.002",
+   "name": "ddcolor_tiny.onnx.part01",
    "size": 40696757,
    "sha": "0f45c428f8bce5afe4fa4a4fce3952e487b52fb8f000818296152eebb0e91e89"
   }

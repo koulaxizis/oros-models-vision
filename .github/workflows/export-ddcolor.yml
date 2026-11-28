@@ -1,6 +1,6 @@
 name: Export DDColor
 
-# Makes ddcolor/ddcolor_tiny.onnx (parts .001, .002 … when over 95 MB) from
+# Makes ddcolor/ddcolor_tiny.onnx (parts .part00, .part01 … when over 95 MB) from
 # the authors' own weights (tools/export_ddcolor.py), checks the colours
 # against PyTorch, adds the "ddcolor" entry to sources.json the first time,
 # writes index.json (tools/mirror.py) and commits the result to the branch
@@ -33,7 +33,7 @@ jobs:
           /tmp/venv/bin/pip install --quiet torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
           /tmp/venv/bin/pip install --quiet onnx==1.23.2 onnxruntime==1.32.0 numpy==2.5.5 pillow==12.0.0
       - run: DDCOLOR_SRC=/tmp/ddcolor /tmp/venv/bin/python tools/export_ddcolor.py
-      - name: Add the sources.json entry (files as export.json lists them)
+      - name: Add the sources.json entry (the whole file; mirror.py records its parts)
         run: |
           python3 - <<'PY'
           import json
@@ -43,7 +43,8 @@ jobs:
           s["local"] = [e for e in s.get("local", []) if e.get("dir") != "ddcolor"]
           s["local"].append({
               "dir": "ddcolor",
-              "files": [f["name"] for f in info["files"]] + ["export.json"],
+              "files": [info["whole"]["name"], "export.json"],
+              "sha": {info["whole"]["name"]: info["whole"]["sha"]},
               "source": "ONNX export of DDColor tiny (Hugging Face piddnad/ddcolor_paper_tiny) by tools/export_ddcolor.py; ddcolor/export.json has the details and the check against PyTorch",
               "licence": "Apache-2.0 (ddcolor/LICENSE), (c) the DDColor authors",
           })

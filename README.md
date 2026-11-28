@@ -23,8 +23,10 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `realesrgan/` | Photo Lab: Enlarge with AI 2×/4× | Real-ESRGAN general x4v3 (SRVGGNetCompact), ONNX written from the official weights | BSD-3-Clause | 4.9 MB |
 | `piper-el-joy/` | Read aloud: the natural Greek voice Joy | Piper voice el_GR-joy-medium (rhasspy/piper-voices), unchanged | CC BY-NC 4.0, non-commercial use only (`piper-el-joy/LICENSE`) | ~63 MB |
 | `depth-anything-v2-small/` | Photo Lab: Portrait blur (background blur by depth) | Depth Anything V2 Small, int8 ONNX export by onnx-community | Apache-2.0 (Small only) | ~25 MB |
+| `multilingual-e5-small/` | Search by meaning in Notes, Mail, Files, Reader and the Assistant (Greek, English, German and more) | intfloat multilingual-e5-small, int8 ONNX export by Xenova (model split into parts) | MIT (model), Apache-2.0 (export) | ~135 MB |
 | `slimsam-77-uniform/` | Photo Lab: Smart select; Atelier: Pick an object (click an object, get its outline) | SlimSAM-77 uniform (pruned Segment Anything), int8 ONNX export by Xenova | Apache-2.0 | ~14 MB |
-| `ddcolor/` | Photo Lab, Atelier: Colourize black-and-white photos | DDColor tiny (ICCV 2023), our own ONNX export (float16 weights), in two parts | Apache-2.0 | 136 MB |
+| `ddcolor/` | Photo Lab, Atelier: Colourize black-and-white photos | DDColor tiny (ICCV 2023), our own ONNX export (float16 weights, in parts) | Apache-2.0 | 136 MB |
+| `silero-vad/` | Notes dictation, Montage's Remove silences, the Assistant's voice input: finds where someone speaks | Silero VAD v6.2 (snakers4/silero-vad), unchanged | MIT | 2.3 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
 file, its size and SHA-256, and for the Hugging Face copies the upstream
@@ -33,12 +35,26 @@ repository and the exact commit they came from.
 ## How the copies are made
 
 `sources.json` lists what to copy. `tools/mirror.py` (Python standard library
-only) downloads each file from the pinned upstream commit, refuses files over
-95 MB (GitHub's limit is 100 MB per file), checks each one against upstream
-(Hugging Face LFS files by their SHA-256, small files by their git blob id)
-and writes `index.json`. The workflow `.github/workflows/mirror.yml` runs it
+only) downloads each file from the pinned upstream commit, checks each one
+against upstream (Hugging Face LFS files by their SHA-256, small files by their
+git blob id) and writes `index.json`. The workflow `.github/workflows/mirror.yml` runs it
 when `sources.json` changes on a `claude/**` branch and commits the result;
 on pull requests it only checks the hashes (`python3 tools/mirror.py --check`).
+
+### Files over 95 MB
+
+GitHub refuses files over 100 MB, so `tools/mirror.py` cuts a file over 95 MB
+into `<file>.part00`, `<file>.part01`, ... of at most 95,000,000 bytes each
+and keeps only the parts. Its `index.json` record keeps the whole file's
+`size` and `sha` (the upstream file's, checked before the cut) and a `parts`
+list with each part's `size` and `sha`, in order. orOS downloads the parts,
+checks each one, joins them and checks the whole file's SHA-256 before it
+keeps it. `--check` checks every part and the joined hash, and fails on a
+part left over from an older cut. `tools/test_mirror.py` tests the cut
+offline (standard library only); the workflow runs it first.
+
+`silero-vad/` is the file of the GitHub tag v6.2 of snakers4/silero-vad,
+unchanged; its SHA-256 is pinned in `sources.json`.
 
 `u2netp/` and `migan/` are the same bytes orOS shipped in its own `vendor/`
 folder (u2netp is also byte for byte rembg's release file); the script only
@@ -78,19 +94,20 @@ exports one ONNX graph with any height and width (multiples of 32; input the
 picture's lightness as grey RGB 0..1, output its a\*b\* in CIE Lab), stores the
 weights as float16, and refuses the file unless its colours match PyTorch's
 at 256 and 512 px by at least 40 dB (it reached 78.8 dB). The file is 136 MB,
-so it is kept as `ddcolor_tiny.onnx.001` and `.002` (95 MB at most each);
-orOS joins the parts and checks the whole file's SHA-256.
-`ddcolor/export.json` records the hashes, the tool versions and the check.
+so it is cut like a big download (`ddcolor_tiny.onnx.part00`, `.part01`);
+its `local` entry pins the whole file's SHA-256 and `index.json` records the
+parts. `ddcolor/export.json` records the hashes, the tool versions and the
+check.
 
 ### Adding a model
 
 1. Add it to `sources.json` (Hugging Face: `repo`, `revision`, `files`,
-   `licence`), with a `LICENSE` file in its folder. A file over 95 MB is
-   split into parts `.001`, `.002`… that orOS joins (as `ddcolor/`).
+   `licence`), with a `LICENSE` file in its folder.
 2. Push to a `claude/**` branch: the workflow copies the files and writes
    `index.json`. Never edit `index.json` or a model file by hand.
 3. Write the hashes from `index.json` into the orOS code that downloads it.
 
-The site is about 610 MB now; keep it under 1 GB.
+The site is about 750 MB with `slimsam-77-uniform/` and `ddcolor/`; keep it under 1 GB.
+Models too big for that (Whisper small, Florence-2) go to a third repository.
 
 Security: see [koulaxizis/oros-models SECURITY.md](https://github.com/koulaxizis/oros-models/blob/main/SECURITY.md).

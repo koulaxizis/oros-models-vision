@@ -72,6 +72,19 @@
    "licence": "Apache-2.0 (Depth Anything V2 Small only; (c) the Depth Anything V2 authors); ONNX export by onnx-community"
   },
   {
+   "dir": "multilingual-e5-small",
+   "repo": "Xenova/multilingual-e5-small",
+   "revision": "main",
+   "files": [
+    "onnx/model_quantized.onnx",
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "special_tokens_map.json",
+    "config.json"
+   ],
+   "licence": "MIT (model, (c) the multilingual-e5 authors, intfloat / Microsoft); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)"
+  },
+  {
    "dir": "slimsam-77-uniform",
    "repo": "Xenova/slimsam-77-uniform",
    "revision": "main",
@@ -132,14 +145,27 @@
    }
   },
   {
+   "dir": "silero-vad",
+   "files": [
+    "silero_vad.onnx"
+   ],
+   "source": "https://raw.githubusercontent.com/snakers4/silero-vad/v6.2/src/silero_vad/data/silero_vad.onnx (tag v6.2), unchanged",
+   "licence": "MIT (silero-vad/LICENSE), (c) 2020-present Silero Team",
+   "sha": {
+    "silero_vad.onnx": "1a153a22f4509e292a94e67d6f9b85e8deb25b4988682b7e174c65279d8788e3"
+   }
+  },
+  {
    "dir": "ddcolor",
    "files": [
-    "ddcolor_tiny.onnx.001",
-    "ddcolor_tiny.onnx.002",
+    "ddcolor_tiny.onnx",
     "export.json"
    ],
    "source": "ONNX export of DDColor tiny (Hugging Face piddnad/ddcolor_paper_tiny) by tools/export_ddcolor.py; ddcolor/export.json has the details and the check against PyTorch",
-   "licence": "Apache-2.0 (ddcolor/LICENSE), (c) the DDColor authors"
+   "licence": "Apache-2.0 (ddcolor/LICENSE), (c) the DDColor authors",
+   "sha": {
+    "ddcolor_tiny.onnx": "422bfa6f6d27d57106412d70874b4b8468bb29b777f16e3e15dfc9958f5b72cf"
+   }
   }
  ]
 }

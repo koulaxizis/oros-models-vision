@@ -18,7 +18,8 @@ own weights and proves it right:
      (the picture's own lightness + the model's a*b*) must match PyTorch's
      by at least MIN_PSNR_DB;
   5. writes ddcolor/ddcolor_tiny.onnx (or, when it is over 95 MB, the parts
-     ddcolor_tiny.onnx.001, .002 … that orOS joins) and ddcolor/export.json.
+     ddcolor_tiny.onnx.part00, .part01 … that orOS joins, named as
+     tools/mirror.py names a split download) and ddcolor/export.json.
 
 The graph:
   input   input   float32 [1, 3, H, W]  the picture's lightness as grey RGB 0..1
@@ -275,12 +276,12 @@ def split(path):
         return [os.path.basename(path)]
     names = []
     with open(path, "rb") as f:
-        i = 1
+        i = 0
         while True:
             chunk = f.read(MAX_PART)
             if not chunk:
                 break
-            part = "%s.%03d" % (path, i)
+            part = "%s.part%02d" % (path, i)
             with open(part, "wb") as o:
                 o.write(chunk)
             names.append(os.path.basename(part))

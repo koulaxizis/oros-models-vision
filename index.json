@@ -891,77 +891,107 @@
     }
    ]
   },
-  "slimsam-77-uniform": {
-   "repo": "Xenova/slimsam-77-uniform",
-   "revision": "5850ab45f587c112167512ffef949107115e26a0",
-   "source": "https://huggingface.co/Xenova/slimsam-77-uniform/tree/5850ab45f587c112167512ffef949107115e26a0",
-   "licence": "Apache-2.0 (slimsam-77-uniform/LICENSE): SlimSAM (c) Zigeng Chen et al., Segment Anything (c) Meta; ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)",
+  "multilingual-e5-small": {
+   "repo": "Xenova/multilingual-e5-small",
+   "revision": "761b726dd34fb83930e26aab4e9ac3899aa1fa78",
+   "source": "https://huggingface.co/Xenova/multilingual-e5-small/tree/761b726dd34fb83930e26aab4e9ac3899aa1fa78",
+   "licence": "MIT (model, (c) the multilingual-e5 authors, intfloat / Microsoft); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)",
    "files": {
-    "onnx/vision_encoder_quantized.onnx": {
-     "size": 8882165,
-     "sha": "cce23c7b2e5d4f330932738fb67ba518e04b0d99ccdd1cccd22a7da4e01f2971"
+    "onnx/model_quantized.onnx": {
+     "size": 118308185,
+     "sha": "f80102d3f2a1229f387d3c81909990d8945513e347b0eab049f7de3c6f98c193",
+     "parts": [
+      {
+       "size": 95000000,
+       "sha": "5c0910dc67c8e11fd0b05f871a0b5050bf0520a038d48152ae489bbf8a1a02ba"
+      },
+      {
+       "size": 23308185,
+       "sha": "2c4265ec38dbf2236e01747e2ececd67fad7e257e6474dc6b6b25cc63c1748c6"
+      }
+     ]
     },
-    "onnx/prompt_encoder_mask_decoder_quantized.onnx": {
-     "size": 4903810,
-     "sha": "cb90b279f549d2cab7fd6e20c38522438c65d84bdcca3d2a764cff7d857fdce2"
+    "tokenizer.json": {
+     "size": 17082730,
+     "sha": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
+    },
+    "tokenizer_config.json": {
+     "size": 443,
+     "sha": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"
+    },
+    "special_tokens_map.json": {
+     "size": 167,
+     "sha": "d05497f1da52c5e09554c0cd874037a083e1dc1b9cfd48034d1c717f1afc07a7"
     },
     "config.json": {
-     "size": 379,
-     "sha": "6339884f168658d3ca6473b486973913fb33e84e625e06ae2dd7b4a808187419"
-    },
-    "preprocessor_config.json": {
-     "size": 466,
-     "sha": "225545a743c654e3c495ec6f545a0eaba57c8ba3fbbd8483b3cb1c0fc58db517"
+     "size": 658,
+     "sha": "cb99455288675345e1a4f411438d5d0adbba5fbd3a67ea4fb03c015433b996c1"
     }
    },
    "upstreamOnnx": [
     {
-     "path": "onnx/prompt_encoder_mask_decoder.onnx",
-     "size": 16557892
+     "path": "onnx/model.onnx",
+     "size": 470268533
     },
     {
-     "path": "onnx/prompt_encoder_mask_decoder.onnx",
-     "size": 16557892
+     "path": "onnx/model.onnx",
+     "size": 470268533
     },
     {
-     "path": "onnx/prompt_encoder_mask_decoder_fp16.onnx",
-     "size": 8550118
+     "path": "onnx/model_bnb4.onnx",
+     "size": 397322585
     },
     {
-     "path": "onnx/prompt_encoder_mask_decoder_fp16.onnx",
-     "size": 8550118
+     "path": "onnx/model_bnb4.onnx",
+     "size": 397322585
     },
     {
-     "path": "onnx/prompt_encoder_mask_decoder_quantized.onnx",
-     "size": 4903810
+     "path": "onnx/model_fp16.onnx",
+     "size": 235336732
     },
     {
-     "path": "onnx/prompt_encoder_mask_decoder_quantized.onnx",
-     "size": 4903810
+     "path": "onnx/model_fp16.onnx",
+     "size": 235336732
     },
     {
-     "path": "onnx/vision_encoder.onnx",
-     "size": 23276014
+     "path": "onnx/model_int8.onnx",
+     "size": 118054593
     },
     {
-     "path": "onnx/vision_encoder.onnx",
-     "size": 23276014
+     "path": "onnx/model_int8.onnx",
+     "size": 118054593
     },
     {
-     "path": "onnx/vision_encoder_fp16.onnx",
-     "size": 12170657
+     "path": "onnx/model_q4.onnx",
+     "size": 398649233
     },
     {
-     "path": "onnx/vision_encoder_fp16.onnx",
-     "size": 12170657
+     "path": "onnx/model_q4.onnx",
+     "size": 398649233
     },
     {
-     "path": "onnx/vision_encoder_quantized.onnx",
-     "size": 8882165
+     "path": "onnx/model_q4f16.onnx",
+     "size": 204777691
     },
     {
-     "path": "onnx/vision_encoder_quantized.onnx",
-     "size": 8882165
+     "path": "onnx/model_q4f16.onnx",
+     "size": 204777691
+    },
+    {
+     "path": "onnx/model_quantized.onnx",
+     "size": 118308185
+    },
+    {
+     "path": "onnx/model_quantized.onnx",
+     "size": 118308185
+    },
+    {
+     "path": "onnx/model_uint8.onnx",
+     "size": 118054630
+    },
+    {
+     "path": "onnx/model_uint8.onnx",
+     "size": 118054630
     }
    ]
   },
@@ -1009,21 +1039,13 @@
     }
    }
   },
-  "ddcolor": {
-   "source": "ONNX export of DDColor tiny (Hugging Face piddnad/ddcolor_paper_tiny) by tools/export_ddcolor.py; ddcolor/export.json has the details and the check against PyTorch",
-   "licence": "Apache-2.0 (ddcolor/LICENSE), (c) the DDColor authors",
+  "silero-vad": {
+   "source": "https://raw.githubusercontent.com/snakers4/silero-vad/v6.2/src/silero_vad/data/silero_vad.onnx (tag v6.2), unchanged",
+   "licence": "MIT (silero-vad/LICENSE), (c) 2020-present Silero Team",
    "files": {
-    "ddcolor_tiny.onnx.001": {
-     "size": 95000000,
-     "sha": "f5d5a5408245c2a71250ad4f13305d1ebb5f2e412b882c513fd3440af4657307"
-    },
-    "ddcolor_tiny.onnx.002": {
-     "size": 40696757,
-     "sha": "0f45c428f8bce5afe4fa4a4fce3952e487b52fb8f000818296152eebb0e91e89"
-    },
-    "export.json": {
-     "size": 3153,
-     "sha": "d7b07cd028f59e68973d03fe0f1aef7f2f091ee8c866b0bcfcfd8b41f311cc58"
+    "silero_vad.onnx": {
+     "size": 2327524,
+     "sha": "1a153a22f4509e292a94e67d6f9b85e8deb25b4988682b7e174c65279d8788e3"
     }
    }
   }
