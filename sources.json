@@ -70,6 +70,24 @@
     "preprocessor_config.json"
    ],
    "licence": "Apache-2.0 (Depth Anything V2 Small only; (c) the Depth Anything V2 authors); ONNX export by onnx-community"
+  },
+  {
+   "dir": "florence-2-base-ft",
+   "repo": "onnx-community/Florence-2-base-ft",
+   "revision": "main",
+   "files": [
+    "onnx/vision_encoder_quantized.onnx",
+    "onnx/embed_tokens_quantized.onnx",
+    "onnx/encoder_model_quantized.onnx",
+    "onnx/decoder_model_merged_quantized.onnx",
+    "vocab.json",
+    "merges.txt",
+    "config.json",
+    "preprocessor_config.json",
+    "generation_config.json",
+    "tokenizer_config.json"
+   ],
+   "licence": "MIT (model, (c) Microsoft); ONNX export Apache-2.0 (onnx-community)"
   }
  ],
  "local": [
