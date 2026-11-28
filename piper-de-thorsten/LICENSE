@@ -1,0 +1,22 @@
+de_DE-thorsten-medium: a German voice for the Piper text to speech system,
+copied unchanged from https://huggingface.co/rhasspy/piper-voices
+(de/de_DE/thorsten/medium/). Its model card (MODEL_CARD in this folder)
+names the dataset, the licence and the model it started from.
+
+Recordings: Thorsten-Voice by Thorsten Müller,
+https://github.com/thorstenMueller/Thorsten-Voice, released under
+CC0 1.0 Universal (public domain dedication),
+https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+Lineage, as far as the model cards say: the voice was fine-tuned from the
+rdh base model (medium quality; nl_BE, one Flemish speaker, CC0); its card
+is copied here too (nl/nl_BE/rdh/medium/MODEL_CARD). The voices repository
+rhasspy/piper-voices is published under the MIT licence.
+
+No non-commercial condition applies as far as these cards say: the voice
+and what it speaks may be used for any purpose. Credit is not required
+by CC0, but orOS names Thorsten Müller and the Piper voices project where
+the voice is downloaded.
+
+orOS downloads this folder on the person's device only when they ask for
+the natural German voice. Nothing in it was changed.

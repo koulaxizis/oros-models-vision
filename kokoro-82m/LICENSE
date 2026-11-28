@@ -1,0 +1,24 @@
+Kokoro-82M v1.0: an English text to speech model by hexgrad,
+https://huggingface.co/hexgrad/Kokoro-82M, released under the
+Apache License 2.0, https://www.apache.org/licenses/LICENSE-2.0
+
+The files in this folder are the ONNX export published by onnx-community,
+https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX (Apache-2.0),
+copied unchanged: the 8-bit model (onnx/model_quantized.onnx), the voices
+af_heart and am_michael (voices/*.bin) and the tokenizer. Both model cards
+are copied here (README.md, and kokoro-82m-card/README.md for hexgrad's).
+
+Training data, as hexgrad's card states: audio in the public domain,
+audio under permissive licences (Apache, MIT and similar), synthetic audio
+made with permission, and this CC BY audio, credited as the licences ask:
+- Koniwa `tnc` (https://github.com/koniwa/koniwa), under 1 hour,
+  CC BY 3.0, https://creativecommons.org/licenses/by/3.0/
+- SIWIS French speech synthesis database
+  (https://datashare.ed.ac.uk/handle/10283/2353), under 11 hours,
+  CC BY 4.0, https://creativecommons.org/licenses/by/4.0/
+The base model is StyleTTS 2 (yl4579/StyleTTS2-LJSpeech, MIT).
+
+No non-commercial condition applies: the model and what it speaks may be
+used for any purpose. orOS names Kokoro and hexgrad where the voice is
+downloaded. orOS downloads this folder on the person's device only when
+they ask for the natural English voice.
