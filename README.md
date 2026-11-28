@@ -27,6 +27,8 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `kokoro-82m-card/` | The model card of Kokoro-82M (licence and training data) | hexgrad/Kokoro-82M | Apache-2.0 | <0.1 MB |
 | `misaki-en/` | Read aloud: how English words are said (for the Kokoro voices) | misaki US English dictionaries by hexgrad (us_gold, us_silver), unchanged | Apache-2.0 (`misaki-en/LICENSE`) | ~6 MB |
 | `depth-anything-v2-small/` | Photo Lab: Portrait blur (background blur by depth) | Depth Anything V2 Small, int8 ONNX export by onnx-community | Apache-2.0 (Small only) | ~25 MB |
+| `multilingual-e5-small/` | Search by meaning in Notes, Mail, Files, Reader and the Assistant (Greek, English, German and more) | intfloat multilingual-e5-small, int8 ONNX export by Xenova (model split into parts) | MIT (model), Apache-2.0 (export) | ~135 MB |
+| `silero-vad/` | Notes dictation, Montage's Remove silences, the Assistant's voice input: finds where someone speaks | Silero VAD v6.2 (snakers4/silero-vad), unchanged | MIT | 2.3 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
 file, its size and SHA-256, and for the Hugging Face copies the upstream
@@ -35,12 +37,26 @@ repository and the exact commit they came from.
 ## How the copies are made
 
 `sources.json` lists what to copy. `tools/mirror.py` (Python standard library
-only) downloads each file from the pinned upstream commit, refuses files over
-95 MB (GitHub's limit is 100 MB per file), checks each one against upstream
-(Hugging Face LFS files by their SHA-256, small files by their git blob id)
-and writes `index.json`. The workflow `.github/workflows/mirror.yml` runs it
+only) downloads each file from the pinned upstream commit, checks each one
+against upstream (Hugging Face LFS files by their SHA-256, small files by their
+git blob id) and writes `index.json`. The workflow `.github/workflows/mirror.yml` runs it
 when `sources.json` changes on a `claude/**` branch and commits the result;
 on pull requests it only checks the hashes (`python3 tools/mirror.py --check`).
+
+### Files over 95 MB
+
+GitHub refuses files over 100 MB, so `tools/mirror.py` cuts a file over 95 MB
+into `<file>.part00`, `<file>.part01`, ... of at most 95,000,000 bytes each
+and keeps only the parts. Its `index.json` record keeps the whole file's
+`size` and `sha` (the upstream file's, checked before the cut) and a `parts`
+list with each part's `size` and `sha`, in order. orOS downloads the parts,
+checks each one, joins them and checks the whole file's SHA-256 before it
+keeps it. `--check` checks every part and the joined hash, and fails on a
+part left over from an older cut. `tools/test_mirror.py` tests the cut
+offline (standard library only); the workflow runs it first.
+
+`silero-vad/` is the file of the GitHub tag v6.2 of snakers4/silero-vad,
+unchanged; its SHA-256 is pinned in `sources.json`.
 
 `u2netp/` and `migan/` are the same bytes orOS shipped in its own `vendor/`
 folder (u2netp is also byte for byte rembg's release file); the script only
@@ -79,6 +95,7 @@ difference 1.6e-6) with ONNX Runtime.
    `index.json`. Never edit `index.json` or a model file by hand.
 3. Write the hashes from `index.json` into the orOS code that downloads it.
 
-The site is about 450 MB now; keep it under 1 GB.
+The site is about 600 MB with `multilingual-e5-small/`; keep it under 1 GB.
+Models too big for that (Whisper small, Florence-2) go to a third repository.
 
 Security: see [koulaxizis/oros-models SECURITY.md](https://github.com/koulaxizis/oros-models/blob/main/SECURITY.md).

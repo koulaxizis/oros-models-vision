@@ -107,6 +107,19 @@
     "config.json"
    ],
    "licence": "Apache-2.0 (the original model card of Kokoro-82M, kept for its licence and training data statement)"
+  },
+  {
+   "dir": "multilingual-e5-small",
+   "repo": "Xenova/multilingual-e5-small",
+   "revision": "main",
+   "files": [
+    "onnx/model_quantized.onnx",
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "special_tokens_map.json",
+    "config.json"
+   ],
+   "licence": "MIT (model, (c) the multilingual-e5 authors, intfloat / Microsoft); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)"
   }
  ],
  "local": [
@@ -169,6 +182,17 @@
     "us_gold.json": "dc414872a49a28ae6c141463d502fd945f3b2fde040484fdc47d00cc4612686f",
     "us_silver.json": "de8f67be911bb6c659187b4a65fd966b6a30e56350e0f790d763210b053ac475",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+   }
+  },
+  {
+   "dir": "silero-vad",
+   "files": [
+    "silero_vad.onnx"
+   ],
+   "source": "https://raw.githubusercontent.com/snakers4/silero-vad/v6.2/src/silero_vad/data/silero_vad.onnx (tag v6.2), unchanged",
+   "licence": "MIT (silero-vad/LICENSE), (c) 2020-present Silero Team",
+   "sha": {
+    "silero_vad.onnx": "1a153a22f4509e292a94e67d6f9b85e8deb25b4988682b7e174c65279d8788e3"
    }
   }
  ]
