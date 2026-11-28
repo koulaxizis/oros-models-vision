@@ -23,6 +23,7 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `realesrgan/` | Photo Lab: Enlarge with AI 2×/4× | Real-ESRGAN general x4v3 (SRVGGNetCompact), ONNX written from the official weights | BSD-3-Clause | 4.9 MB |
 | `piper-el-joy/` | Read aloud: the natural Greek voice Joy | Piper voice el_GR-joy-medium (rhasspy/piper-voices), unchanged | CC BY-NC 4.0, non-commercial use only (`piper-el-joy/LICENSE`) | ~63 MB |
 | `depth-anything-v2-small/` | Photo Lab: Portrait blur (background blur by depth) | Depth Anything V2 Small, int8 ONNX export by onnx-community | Apache-2.0 (Small only) | ~25 MB |
+| `silero-vad/` | Notes dictation, Montage's Remove silences, the Assistant's voice input: finds where someone speaks | Silero VAD v6.2 (snakers4/silero-vad), unchanged | MIT | 2.3 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
 file, its size and SHA-256, and for the Hugging Face copies the upstream
@@ -37,6 +38,9 @@ only) downloads each file from the pinned upstream commit, refuses files over
 and writes `index.json`. The workflow `.github/workflows/mirror.yml` runs it
 when `sources.json` changes on a `claude/**` branch and commits the result;
 on pull requests it only checks the hashes (`python3 tools/mirror.py --check`).
+
+`silero-vad/` is the file of the GitHub tag v6.2 of snakers4/silero-vad,
+unchanged; its SHA-256 is pinned in `sources.json`.
 
 `u2netp/` and `migan/` are the same bytes orOS shipped in its own `vendor/`
 folder (u2netp is also byte for byte rembg's release file); the script only
