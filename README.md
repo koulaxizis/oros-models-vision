@@ -23,6 +23,9 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `realesrgan/` | Photo Lab: Enlarge with AI 2×/4× | Real-ESRGAN general x4v3 (SRVGGNetCompact), ONNX written from the official weights | BSD-3-Clause | 4.9 MB |
 | `piper-el-joy/` | Read aloud: the natural Greek voice Joy | Piper voice el_GR-joy-medium (rhasspy/piper-voices), unchanged | CC BY-NC 4.0, non-commercial use only (`piper-el-joy/LICENSE`) | ~63 MB |
 | `piper-de-thorsten/` | Read aloud: the natural German voice Thorsten | Piper voice de_DE-thorsten-medium (rhasspy/piper-voices), unchanged | CC0 recordings, base model CC0 (`piper-de-thorsten/LICENSE`) | ~63 MB |
+| `kokoro-82m/` | Read aloud: the natural English voices Heart and Michael | Kokoro-82M v1.0 by hexgrad, 8-bit ONNX export by onnx-community, voices af_heart and am_michael, unchanged | Apache-2.0 (`kokoro-82m/LICENSE`, with the CC BY credits of its training audio) | ~93 MB |
+| `kokoro-82m-card/` | The model card of Kokoro-82M (licence and training data) | hexgrad/Kokoro-82M | Apache-2.0 | <0.1 MB |
+| `misaki-en/` | Read aloud: how English words are said (for the Kokoro voices) | misaki US English dictionaries by hexgrad (us_gold, us_silver), unchanged | Apache-2.0 (`misaki-en/LICENSE`) | ~6 MB |
 | `depth-anything-v2-small/` | Photo Lab: Portrait blur (background blur by depth) | Depth Anything V2 Small, int8 ONNX export by onnx-community | Apache-2.0 (Small only) | ~25 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
