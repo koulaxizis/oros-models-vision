@@ -891,6 +891,110 @@
     }
    ]
   },
+  "multilingual-e5-small": {
+   "repo": "Xenova/multilingual-e5-small",
+   "revision": "761b726dd34fb83930e26aab4e9ac3899aa1fa78",
+   "source": "https://huggingface.co/Xenova/multilingual-e5-small/tree/761b726dd34fb83930e26aab4e9ac3899aa1fa78",
+   "licence": "MIT (model, (c) the multilingual-e5 authors, intfloat / Microsoft); ONNX export Apache-2.0 ((c) Joshua Lochner / Xenova)",
+   "files": {
+    "onnx/model_quantized.onnx": {
+     "size": 118308185,
+     "sha": "f80102d3f2a1229f387d3c81909990d8945513e347b0eab049f7de3c6f98c193",
+     "parts": [
+      {
+       "size": 95000000,
+       "sha": "5c0910dc67c8e11fd0b05f871a0b5050bf0520a038d48152ae489bbf8a1a02ba"
+      },
+      {
+       "size": 23308185,
+       "sha": "2c4265ec38dbf2236e01747e2ececd67fad7e257e6474dc6b6b25cc63c1748c6"
+      }
+     ]
+    },
+    "tokenizer.json": {
+     "size": 17082730,
+     "sha": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
+    },
+    "tokenizer_config.json": {
+     "size": 443,
+     "sha": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"
+    },
+    "special_tokens_map.json": {
+     "size": 167,
+     "sha": "d05497f1da52c5e09554c0cd874037a083e1dc1b9cfd48034d1c717f1afc07a7"
+    },
+    "config.json": {
+     "size": 658,
+     "sha": "cb99455288675345e1a4f411438d5d0adbba5fbd3a67ea4fb03c015433b996c1"
+    }
+   },
+   "upstreamOnnx": [
+    {
+     "path": "onnx/model.onnx",
+     "size": 470268533
+    },
+    {
+     "path": "onnx/model.onnx",
+     "size": 470268533
+    },
+    {
+     "path": "onnx/model_bnb4.onnx",
+     "size": 397322585
+    },
+    {
+     "path": "onnx/model_bnb4.onnx",
+     "size": 397322585
+    },
+    {
+     "path": "onnx/model_fp16.onnx",
+     "size": 235336732
+    },
+    {
+     "path": "onnx/model_fp16.onnx",
+     "size": 235336732
+    },
+    {
+     "path": "onnx/model_int8.onnx",
+     "size": 118054593
+    },
+    {
+     "path": "onnx/model_int8.onnx",
+     "size": 118054593
+    },
+    {
+     "path": "onnx/model_q4.onnx",
+     "size": 398649233
+    },
+    {
+     "path": "onnx/model_q4.onnx",
+     "size": 398649233
+    },
+    {
+     "path": "onnx/model_q4f16.onnx",
+     "size": 204777691
+    },
+    {
+     "path": "onnx/model_q4f16.onnx",
+     "size": 204777691
+    },
+    {
+     "path": "onnx/model_quantized.onnx",
+     "size": 118308185
+    },
+    {
+     "path": "onnx/model_quantized.onnx",
+     "size": 118308185
+    },
+    {
+     "path": "onnx/model_uint8.onnx",
+     "size": 118054630
+    },
+    {
+     "path": "onnx/model_uint8.onnx",
+     "size": 118054630
+    }
+   ]
+  },
   "u2netp": {
    "source": "https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx",
    "licence": "Apache-2.0 (u2netp/LICENSE), (c) 2020 Xuebin Qin and contributors",
