@@ -6,7 +6,8 @@ TensorFlow models. orOS runs ONNX with ONNX Runtime Web, so this script:
   1. downloads the float16 TFLite file (version 4) from the first source
      that answers and checks it (TFLite magic; SHA-256 once SRC_SHA is set);
   2. converts it with tf2onnx (opset 17) and renames the graph's input to
-     "input" (int32 [1, 192, 192, 3], RGB 0..255) and its output to
+     "input" ([1, 192, 192, 3], RGB 0..255, the release's integer type,
+     uint8 for v4) and its output to
      "keypoints" (float32 [1, 1, 17, 3]: y, x, score per COCO keypoint,
      y and x in 0..1 of the input);
   3. refuses the file unless ONNX Runtime gives the same keypoints as the
@@ -36,9 +37,9 @@ SOURCES = [
     "https://storage.googleapis.com/tfhub-lite-models/google/lite-model/movenet/singlepose/lightning/tflite/float16/4.tflite",
     "https://www.kaggle.com/api/v1/models/google/movenet/tfLite/singlepose-lightning-tflite-float16/1/download",
 ]
-# SHA-256 of the TFLite file. Empty on the first run, which records it in
-# export.json; then it is written here so every later run checks it.
-SRC_SHA = ""
+# SHA-256 of the TFLite file (seen on the first run, 2026-11-28); every
+# run checks it.
+SRC_SHA = "0fac2226112d0371903ca86e3853cec24ef603a0b2f96f589b180f0ebdd135ab"
 
 KEYPOINTS = ["nose", "left_eye", "right_eye", "left_ear", "right_ear",
              "left_shoulder", "right_shoulder", "left_elbow", "right_elbow",
@@ -135,6 +136,7 @@ def main():
         interp = tf.lite.Interpreter(model_path=p)
         interp.allocate_tensors()
         tin, tout = interp.get_input_details()[0], interp.get_output_details()[0]
+        in_type = np.dtype(tin["dtype"]).name
         if list(tin["shape"]) != [1, 192, 192, 3] or list(tout["shape"]) != [1, 1, 17, 3]:
             raise SystemExit("unexpected TFLite shapes %s %s" % (tin["shape"], tout["shape"]))
 
@@ -146,7 +148,7 @@ def main():
             interp.set_tensor(tin["index"], x)
             interp.invoke()
             want = interp.get_tensor(tout["index"])
-            got = sess.run(["keypoints"], {"input": x.astype(np.int32)})[0]
+            got = sess.run(["keypoints"], {"input": x})[0]
             diffs[name] = float(np.abs(want - got).max())
             if name == "astronaut":
                 astro = got[0, 0]
@@ -168,7 +170,7 @@ def main():
         "source": url,
         "sourceSha256": sha256(tfl),
         "onnxSha256": sha256(data),
-        "input": {"name": "input", "type": "int32", "shape": [1, 192, 192, 3], "meaning": "RGB 0..255, square, letterboxed"},
+        "input": {"name": "input", "type": in_type, "shape": [1, 192, 192, 3], "meaning": "RGB 0..255, square, letterboxed"},
         "output": {"name": "keypoints", "type": "float32", "shape": [1, 1, 17, 3], "meaning": "y, x (0..1 of the input), score"},
         "keypoints": KEYPOINTS,
         "tools": {"python": sys.version.split()[0], "tensorflow": tf.__version__, "tf2onnx": tf2onnx.__version__,

@@ -71,7 +71,7 @@ difference 1.6e-6) with ONNX Runtime.
 `movenet/` is not a copy either: Google publishes MoveNet only as TFLite and
 TensorFlow models. `tools/export_movenet.py` (workflow
 `.github/workflows/export-movenet.yml`) downloads the float16 TFLite release,
-converts it with tf2onnx (opset 17), renames the input to `input` (int32
+converts it with tf2onnx (opset 17), renames the input to `input` (uint8
 `[1, 192, 192, 3]`, RGB 0..255) and the output to `keypoints` (float32
 `[1, 1, 17, 3]`: y, x, score), and refuses the file unless ONNX Runtime gives
 the same keypoints as the TFLite interpreter (largest difference under 1e-4)
