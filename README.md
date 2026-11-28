@@ -23,6 +23,7 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `realesrgan/` | Photo Lab: Enlarge with AI 2×/4× | Real-ESRGAN general x4v3 (SRVGGNetCompact), ONNX written from the official weights | BSD-3-Clause | 4.9 MB |
 | `piper-el-joy/` | Read aloud: the natural Greek voice Joy | Piper voice el_GR-joy-medium (rhasspy/piper-voices), unchanged | CC BY-NC 4.0, non-commercial use only (`piper-el-joy/LICENSE`) | ~63 MB |
 | `depth-anything-v2-small/` | Photo Lab: Portrait blur (background blur by depth) | Depth Anything V2 Small, int8 ONNX export by onnx-community | Apache-2.0 (Small only) | ~25 MB |
+| `movenet/` | Workouts: count repetitions with the camera (body keypoints only) | Google MoveNet SinglePose Lightning v4, ONNX converted from the float16 TFLite release | Apache-2.0 | ~5 to 10 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
 file, its size and SHA-256, and for the Hugging Face copies the upstream
@@ -66,6 +67,16 @@ an ONNX graph (opset 17, input RGB 0..1 `[1, 3, H, W]`, output `[1, 3, 4H,
 
 It was checked against a plain numpy run of the PyTorch network (largest
 difference 1.6e-6) with ONNX Runtime.
+
+`movenet/` is not a copy either: Google publishes MoveNet only as TFLite and
+TensorFlow models. `tools/export_movenet.py` (workflow
+`.github/workflows/export-movenet.yml`) downloads the float16 TFLite release,
+converts it with tf2onnx (opset 17), renames the input to `input` (int32
+`[1, 192, 192, 3]`, RGB 0..255) and the output to `keypoints` (float32
+`[1, 1, 17, 3]`: y, x, score), and refuses the file unless ONNX Runtime gives
+the same keypoints as the TFLite interpreter (largest difference under 1e-4)
+and finds the person in a test photo. `movenet/export.json` records the
+source, both hashes, the tool versions and the check.
 
 ### Adding a model
 
