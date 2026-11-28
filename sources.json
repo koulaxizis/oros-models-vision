@@ -70,6 +70,24 @@
     "preprocessor_config.json"
    ],
    "licence": "Apache-2.0 (Depth Anything V2 Small only; (c) the Depth Anything V2 authors); ONNX export by onnx-community"
+  },
+  {
+   "dir": "probe-onnx-community",
+   "repo": "onnx-community/whisper-small",
+   "revision": "main",
+   "files": [
+    "generation_config.json"
+   ],
+   "licence": "probe"
+  },
+  {
+   "dir": "probe-xenova",
+   "repo": "Xenova/whisper-small",
+   "revision": "main",
+   "files": [
+    "generation_config.json"
+   ],
+   "licence": "probe"
   }
  ],
  "local": [
