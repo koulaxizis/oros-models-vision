@@ -29,6 +29,7 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `depth-anything-v2-small/` | Photo Lab: Portrait blur (background blur by depth) | Depth Anything V2 Small, int8 ONNX export by onnx-community | Apache-2.0 (Small only) | ~25 MB |
 | `multilingual-e5-small/` | Search by meaning in Notes, Mail, Files, Reader and the Assistant (Greek, English, German and more) | intfloat multilingual-e5-small, int8 ONNX export by Xenova (model split into parts) | MIT (model), Apache-2.0 (export) | ~135 MB |
 | `silero-vad/` | Notes dictation, Montage's Remove silences, the Assistant's voice input: finds where someone speaks | Silero VAD v6.2 (snakers4/silero-vad), unchanged | MIT | 2.3 MB |
+| `movenet/` | Workouts: count repetitions with the camera (body keypoints only) | Google MoveNet SinglePose Lightning v4, ONNX converted from the float16 TFLite release | Apache-2.0 | 9.4 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
 file, its size and SHA-256, and for the Hugging Face copies the upstream
@@ -86,6 +87,16 @@ an ONNX graph (opset 17, input RGB 0..1 `[1, 3, H, W]`, output `[1, 3, 4H,
 
 It was checked against a plain numpy run of the PyTorch network (largest
 difference 1.6e-6) with ONNX Runtime.
+
+`movenet/` is not a copy either: Google publishes MoveNet only as TFLite and
+TensorFlow models. `tools/export_movenet.py` (workflow
+`.github/workflows/export-movenet.yml`) downloads the float16 TFLite release,
+converts it with tf2onnx (opset 17), renames the input to `input` (uint8
+`[1, 192, 192, 3]`, RGB 0..255) and the output to `keypoints` (float32
+`[1, 1, 17, 3]`: y, x, score), and refuses the file unless ONNX Runtime gives
+the same keypoints as the TFLite interpreter (largest difference under 1e-4)
+and finds the person in a test photo. `movenet/export.json` records the
+source, both hashes, the tool versions and the check.
 
 ### Adding a model
 
