@@ -24,6 +24,7 @@ repository keeps each site under GitHub Pages' 1 GB.
 | `piper-el-joy/` | Read aloud: the natural Greek voice Joy | Piper voice el_GR-joy-medium (rhasspy/piper-voices), unchanged | CC BY-NC 4.0, non-commercial use only (`piper-el-joy/LICENSE`) | ~63 MB |
 | `depth-anything-v2-small/` | Photo Lab: Portrait blur (background blur by depth) | Depth Anything V2 Small, int8 ONNX export by onnx-community | Apache-2.0 (Small only) | ~25 MB |
 | `multilingual-e5-small/` | Search by meaning in Notes, Mail, Files, Reader and the Assistant (Greek, English, German and more) | intfloat multilingual-e5-small, int8 ONNX export by Xenova (model split into parts) | MIT (model), Apache-2.0 (export) | ~135 MB |
+| `silero-vad/` | Notes dictation, Montage's Remove silences, the Assistant's voice input: finds where someone speaks | Silero VAD v6.2 (snakers4/silero-vad), unchanged | MIT | 2.3 MB |
 
 Each folder has the licence of its files. `index.json` records, for every
 file, its size and SHA-256, and for the Hugging Face copies the upstream
@@ -49,6 +50,9 @@ checks each one, joins them and checks the whole file's SHA-256 before it
 keeps it. `--check` checks every part and the joined hash, and fails on a
 part left over from an older cut. `tools/test_mirror.py` tests the cut
 offline (standard library only); the workflow runs it first.
+
+`silero-vad/` is the file of the GitHub tag v6.2 of snakers4/silero-vad,
+unchanged; its SHA-256 is pinned in `sources.json`.
 
 `u2netp/` and `migan/` are the same bytes orOS shipped in its own `vendor/`
 folder (u2netp is also byte for byte rembg's release file); the script only
